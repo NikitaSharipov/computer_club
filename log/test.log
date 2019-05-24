@@ -2235,3 +2235,649 @@ Processing by ComputersController#show as HTML
   Rendered shared/_nav.html.slim (0.1ms)
 Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.3ms)
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 11:20:21.712359"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$UtqLSbbxUkmsDTZjh8Cm2uGGp8ehgW9ltd40w.ULtTxJjLSbV9OpG"], ["created_at", "2019-05-22 11:20:21.725286"], ["updated_at", "2019-05-22 11:20:21.725286"]]
+  [1m[35m (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:20:21 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.1ms)
+  Rendered shared/_nav.html.slim (1.7ms)
+Completed 200 OK in 141ms (Views: 134.8ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:20:21 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 14:20:21 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.8ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.5ms)
+Started GET "/computers/133" for 127.0.0.1 at 2019-05-22 14:20:21 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"133"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 133], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (1.7ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 11:22:10.367395"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$FLBdXugm8v030Z1OLM6OheH6NDgfhXVd1SVuYoXlQrqdCU5XYXGFa"], ["created_at", "2019-05-22 11:22:10.380292"], ["updated_at", "2019-05-22 11:22:10.380292"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:22:10 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.0ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 88ms (Views: 81.4ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:22:10 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 14:22:10 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (13.9ms)
+  Rendered computers/index.html.slim within layouts/application (16.3ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 20ms (Views: 17.6ms | ActiveRecord: 0.5ms)
+Started GET "/computers/134" for 127.0.0.1 at 2019-05-22 14:22:10 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"134"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 134], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (18.0ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.5ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 11:22:29.316933"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$./NiYzKTQ82TikrzJDN1eej2F8942TbAYgLXWIofUjmdJpluhMpsa"], ["created_at", "2019-05-22 11:22:29.330028"], ["updated_at", "2019-05-22 11:22:29.330028"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:22:29 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.0ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 138ms (Views: 131.6ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 14:22:29 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.5ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 14:22:29 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.7ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.5ms)
+Started GET "/computers/135" for 127.0.0.1 at 2019-05-22 14:22:29 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"135"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 135], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (1.7ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (23.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (328.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "computer_club_test"[0m
+  [1m[35m (841.8ms)[0m  [1m[35mCREATE DATABASE "computer_club_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "computers" CASCADE[0m
+  [1m[35m (71.4ms)[0m  [1m[35mCREATE TABLE "computers" ("id" bigserial primary key, "title" character varying NOT NULL, "specifications" text, "cost" integer NOT NULL, "creation" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "software_requests" CASCADE[0m
+  [1m[35m (64.8ms)[0m  [1m[35mCREATE TABLE "software_requests" ("id" bigserial primary key, "computer_id" bigint, "user_id" bigint, "title" character varying NOT NULL, "url" character varying NOT NULL, "description" text, "completed" boolean)[0m
+  [1m[35m (36.1ms)[0m  [1m[35mCREATE  INDEX  "index_software_requests_on_computer_id" ON "software_requests"  ("computer_id")[0m
+  [1m[35m (37.9ms)[0m  [1m[35mCREATE  INDEX  "index_software_requests_on_user_id" ON "software_requests"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (62.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (62.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (29.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (7.5ms)[0m  [1m[35mALTER TABLE "software_requests" ADD CONSTRAINT "fk_rails_5bac5c5e15"
+FOREIGN KEY ("computer_id")
+  REFERENCES "computers" ("id")
+[0m
+  [1m[35m (7.5ms)[0m  [1m[35mALTER TABLE "software_requests" ADD CONSTRAINT "fk_rails_d991223f12"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (47.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (5.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20190522112753)[0m
+  [1m[35m (8.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20190521141317),
+(20190521181252);
+
+[0m
+  [1m[35m (47.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2019-05-22 11:38:28.312308"], ["updated_at", "2019-05-22 11:38:28.312308"]]
+  [1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.4ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 13:38:47.094766"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$6tLpjNn8g4NyT8aQIH.amuTURo/VkpDbvrVUEfUTT0JAPHRC2jSuW"], ["created_at", "2019-05-22 13:38:47.107913"], ["updated_at", "2019-05-22 13:38:47.107913"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:38:47 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.1ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 141ms (Views: 135.1ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:38:47 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 16:38:47 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.8ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.4ms)
+Started GET "/computers/1" for 127.0.0.1 at 2019-05-22 16:38:47 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (10.1ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 13ms (Views: 9.2ms | ActiveRecord: 2.3ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 13:39:04.996112"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$sfC7Y1vFQDSPEWlp02f3Que20Qb.WrKU4c7JXpO6sfcU9MO2K0SGq"], ["created_at", "2019-05-22 13:39:05.009300"], ["updated_at", "2019-05-22 13:39:05.009300"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:39:05 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.0ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 138ms (Views: 130.8ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:39:05 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 16:39:05 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.8ms | ActiveRecord: 0.5ms)
+Started GET "/computers/2" for 127.0.0.1 at 2019-05-22 16:39:05 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (9.7ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 13ms (Views: 9.0ms | ActiveRecord: 2.1ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.4ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 13:40:13.279491"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$I6Bb/SL8vfYjvHmMxv.mn.zuQziZIpN34Gf1OP.4ny6dlNmmHDqM2"], ["created_at", "2019-05-22 13:40:13.292664"], ["updated_at", "2019-05-22 13:40:13.292664"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:13 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.3ms)
+  Rendered shared/_nav.html.slim (1.4ms)
+Completed 200 OK in 138ms (Views: 132.2ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:13 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 16:40:13 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.6ms)
+  Rendered computers/index.html.slim within layouts/application (3.8ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.5ms)
+Started GET "/computers/3" for 127.0.0.1 at 2019-05-22 16:40:13 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (9.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 12ms (Views: 8.7ms | ActiveRecord: 2.1ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 13:40:21.183899"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$mpF9pgsd.GDxfK0u4gb8l.igUMFN1tiYJjMkdxAOgcNAOfQLM9LKK"], ["created_at", "2019-05-22 13:40:21.196891"], ["updated_at", "2019-05-22 13:40:21.196891"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.0ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 139ms (Views: 132.8ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.7ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.4ms)
+Started GET "/computers/4" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (9.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 13ms (Views: 8.8ms | ActiveRecord: 2.0ms)
+Started POST "/computers/4/software_requests" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by SoftwareRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "software_request"=>{"title"=>"Software 1", "url"=>"www.google.com", "description"=>""}, "commit"=>"Send request!", "computer_id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mSoftwareRequest Create (0.6ms)[0m  [1m[32mINSERT INTO "software_requests" ("computer_id", "user_id", "title", "url", "description") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["computer_id", 4], ["user_id", 4], ["title", "Software 1"], ["url", "www.google.com"], ["description", ""]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/computers/4
+Completed 302 Found in 7ms (ActiveRecord: 1.3ms)
+Started GET "/computers/4" for 127.0.0.1 at 2019-05-22 16:40:21 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (0.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-21 13:40:41.463692"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$dBMlNgZGN/tpHoDl7wIP5eYpRhsVwBp7D.fya6VXu18IDvB4W3X.m"], ["created_at", "2019-05-22 13:40:41.476626"], ["updated_at", "2019-05-22 13:40:41.476626"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.9ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 138ms (Views: 131.9ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.3ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.6ms)
+  Rendered computers/index.html.slim within layouts/application (3.8ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.5ms)
+Started GET "/computers/5" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (9.5ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 12ms (Views: 8.7ms | ActiveRecord: 2.0ms)
+Started POST "/computers/5/software_requests" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by SoftwareRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "software_request"=>{"title"=>"Software 1", "url"=>"www.google.com", "description"=>""}, "commit"=>"Send request!", "computer_id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mSoftwareRequest Create (0.5ms)[0m  [1m[32mINSERT INTO "software_requests" ("computer_id", "user_id", "title", "url", "description") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["computer_id", 5], ["user_id", 5], ["title", "Software 1"], ["url", "www.google.com"], ["description", ""]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/computers/5
+Completed 302 Found in 6ms (ActiveRecord: 1.2ms)
+Started GET "/computers/5" for 127.0.0.1 at 2019-05-22 16:40:41 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (0.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (19.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (19.8ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-23 08:44:08.462825"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (31.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (12.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$/IaoIL6xRsRKSwYMPy4bwelKqaqY6XkXGDuvXmzq1TidUjwPZmrAe"], ["created_at", "2019-05-24 08:44:08.573089"], ["updated_at", "2019-05-24 08:44:08.573089"]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-24 11:44:08 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (46.2ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 291ms (Views: 271.7ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-24 11:44:08 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 18ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-24 11:44:08 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.6ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (6.4ms)
+  Rendered computers/index.html.slim within layouts/application (15.2ms)
+  Rendered shared/_nav.html.slim (0.3ms)
+Completed 200 OK in 34ms (Views: 20.1ms | ActiveRecord: 0.9ms)
+Started GET "/computers/6" for 127.0.0.1 at 2019-05-24 11:44:08 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.4ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (24.2ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 30ms (Views: 23.1ms | ActiveRecord: 3.3ms)
+Started POST "/computers/6/software_requests" for 127.0.0.1 at 2019-05-24 11:44:09 +0300
+Processing by SoftwareRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "software_request"=>{"title"=>"Software 1", "url"=>"www.google.com", "description"=>""}, "commit"=>"Send request!", "computer_id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSoftwareRequest Create (41.0ms)[0m  [1m[32mINSERT INTO "software_requests" ("computer_id", "user_id", "title", "url", "description") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["computer_id", 6], ["user_id", 6], ["title", "Software 1"], ["url", "www.google.com"], ["description", ""]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/computers/6
+Completed 302 Found in 52ms (ActiveRecord: 41.8ms)
+Started GET "/computers/6" for 127.0.0.1 at 2019-05-24 11:44:09 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (0.8ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-23 09:07:19.729074"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$XJovDZ2vliu2pxYBCiERTeX87KMk9s5NxrniMInp.n00B2Mb/YdKy"], ["created_at", "2019-05-24 09:07:19.742247"], ["updated_at", "2019-05-24 09:07:19.742247"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:07:19 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.1ms)
+Completed 500 Internal Server Error in 3637ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.4ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-23 09:16:41.793147"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$BGwsWu0EYlE55ZV/gfTrYuyNe0voytbZ1c6D2ve7ux4V/sHkaJvvq"], ["created_at", "2019-05-24 09:16:41.806103"], ["updated_at", "2019-05-24 09:16:41.806103"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:16:41 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (10.7ms)
+Completed 500 Internal Server Error in 3115ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-23 09:17:27.212727"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$xtaA6hMAwmPALd8VFODnlesfZLQ9OI5ZEZfHZ.lV32LgHfMxnarjW"], ["created_at", "2019-05-24 09:17:27.225682"], ["updated_at", "2019-05-24 09:17:27.225682"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:17:27 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.2ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 4675ms (Views: 4669.1ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:17:31 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-24 12:17:31 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.7ms)
+  Rendered computers/index.html.slim within layouts/application (4.0ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 0.4ms)
+Started GET "/computers/9" for 127.0.0.1 at 2019-05-24 12:17:31 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.1ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (10.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 14ms (Views: 9.9ms | ActiveRecord: 2.0ms)
+Started POST "/computers/9/software_requests" for 127.0.0.1 at 2019-05-24 12:17:31 +0300
+Processing by SoftwareRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "software_request"=>{"title"=>"Software 1", "url"=>"www.google.com", "description"=>""}, "commit"=>"Send request!", "computer_id"=>"9"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSoftwareRequest Create (0.5ms)[0m  [1m[32mINSERT INTO "software_requests" ("computer_id", "user_id", "title", "url", "description") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["computer_id", 9], ["user_id", 9], ["title", "Software 1"], ["url", "www.google.com"], ["description", ""]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/computers/9
+Completed 302 Found in 7ms (ActiveRecord: 1.2ms)
+Started GET "/computers/9" for 127.0.0.1 at 2019-05-24 12:17:31 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (0.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Create (0.3ms)[0m  [1m[32mINSERT INTO "computers" ("title", "specifications", "cost", "creation") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "computer1"], ["specifications", "Hdd 1 tb"], ["cost", 10], ["creation", "2019-05-23 09:20:35.300986"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@test.com"], ["encrypted_password", "$2a$04$TDSf8aq2VwXd/8tIMBLDgOifWHikzpXeSt63hzHkWTVJbnOah7XCu"], ["created_at", "2019-05-24 09:20:35.314038"], ["updated_at", "2019-05-24 09:20:35.314038"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (10.5ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 135ms (Views: 128.8ms | ActiveRecord: 0.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"user1@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "user1@test.com"], ["LIMIT", 1]]
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms)
+Started GET "/" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by ComputersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering computers/index.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  Rendered collection of computers/_computer.html.slim [1 times] (1.5ms)
+  Rendered computers/index.html.slim within layouts/application (3.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 0.4ms)
+Started GET "/computers/10" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (9.5ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 12ms (Views: 8.8ms | ActiveRecord: 2.1ms)
+Started POST "/computers/10/software_requests" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by SoftwareRequestsController#create as HTML
+  Parameters: {"utf8"=>"✓", "software_request"=>{"title"=>"Software 1", "url"=>"www.google.com", "description"=>""}, "commit"=>"Send request!", "computer_id"=>"10"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mSoftwareRequest Create (0.4ms)[0m  [1m[32mINSERT INTO "software_requests" ("computer_id", "user_id", "title", "url", "description") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["computer_id", 10], ["user_id", 10], ["title", "Software 1"], ["url", "www.google.com"], ["description", ""]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/computers/10
+Completed 302 Found in 6ms (ActiveRecord: 1.2ms)
+Started GET "/computers/10" for 127.0.0.1 at 2019-05-24 12:20:35 +0300
+Processing by ComputersController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT  "computers".* FROM "computers" WHERE "computers"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering computers/show.html.slim within layouts/application
+  Rendered computers/show.html.slim within layouts/application (0.6ms)
+  Rendered shared/_nav.html.slim (0.1ms)
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
