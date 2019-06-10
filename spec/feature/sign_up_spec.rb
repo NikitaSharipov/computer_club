@@ -8,7 +8,7 @@ feature 'User can sign up', %q{
 
   background do
     visit root_path
-    click_on 'Sign up'
+    click_on 'Sign up', match: :first
   end
 
   scenario 'Unregistered user tries to sign up' do

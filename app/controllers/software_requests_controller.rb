@@ -1,13 +1,6 @@
 class SoftwareRequestsController < ApplicationController
 
   def create
-    #@software_request = SoftwareRequest.new
-    #@software_request.user = current_user
-    #@software_request.computer_id = computer_id
-    #byebug
-    #@software_request.save(software_request_params)
-    #  software_request_params.require(:title)
-
     @software_request = SoftwareRequest.new(software_request_params)
     @software_request.user = current_user
     @software_request.computer_id = computer_id
