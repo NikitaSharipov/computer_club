@@ -11,27 +11,35 @@ feature 'User can book a computer', %q{
 
   background { sign_in(user) }
 
-  scenario 'User sees current reservations' do
-    date_now = Time.now
-    reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
-    visit reservation_computers_path
-    date_string = "0#{date_now.day} #{date_now.strftime("%B")}, #{(date_now - 10800).strftime('%H:%M')}"
-    expect(page).to have_content("Reservations start time: #{date_string}")
-  end
+  describe 'User ' do
 
-  scenario 'User sees current reservations on сertain date' do
-    date_now = Time.now
-    reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
-    #reservation = Reservation.create(start_time: date_now + 1.week , end_time: date_now + 3600 + 1.week, user: user, computer: computer)
-    visit reservation_computers_path
+    given(:date_now) { Time.now }
 
-    select((date_now + 1.month).strftime("%B"), from: '_date_reservations_2i')
-    select('10', from: "_date_reservations_3i")
+    background do
+      reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
+      visit reservation_computers_path
+    end
 
-    click_on 'Show'
+    scenario 'sees current reservations on сertain date' do
 
-    date_string = "0#{date_now.day} #{date_now.strftime("%B")}, #{(date_now - 10800).strftime('%H:%M')}"
-    expect(page).to_not have_content("Reservations start time: #{date_string}")
+      select((date_now).strftime("%B"), from: '_date_reservations_2i')
+      select("#{date_now.day  }", from: "_date_reservations_3i")
+
+      click_on 'Show'
+
+      expect(page).to have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+    end
+
+    scenario "don't sees reservations on other date" do
+
+      select((date_now).strftime("%B"), from: '_date_reservations_2i')
+      select('11', from: "_date_reservations_3i")
+
+      click_on 'Show'
+
+      expect(page).to_not have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+    end
+
   end
 
   scenario 'User tries to book a computer' do

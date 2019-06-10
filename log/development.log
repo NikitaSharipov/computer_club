@@ -6602,3 +6602,197 @@ Processing by ComputersController#reservation as HTML
 Completed 200 OK in 1244ms (Views: 1204.9ms | ActiveRecord: 4.7ms)
 
 
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:23:00 +0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.3ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (2.7ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 2]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [1 times] (0.2ms)
+  [1m[36mCACHE Computer Load (0.0ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:21
+  Rendered computers/reservation.html.slim within layouts/application (55.7ms)
+  Rendered shared/_nav.html.slim (1.4ms)
+Completed 200 OK in 198ms (Views: 171.4ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:23:02 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.4ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.4ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (3.0ms)
+  [1m[36mReservation Load (0.3ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 2]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [1 times] (0.3ms)
+  [1m[36mCACHE Computer Load (0.0ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:21
+  Rendered computers/reservation.html.slim within layouts/application (20.6ms)
+  Rendered shared/_nav.html.slim (1.4ms)
+Completed 200 OK in 48ms (Views: 41.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:26:07 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (7.0ms)
+  Rendered computers/reservation.html.slim within layouts/application (23.7ms)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 6.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `date_prepare' for #<Reservation:0x00007f42dc4a0c60>):
+    1: -if reservation.show?(@date)
+    2:   div class="reservation #{reservation.id}"
+    3:     p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+    4:     p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+  
+app/models/reservation.rb:17:in `show?'
+app/views/reservations/_reservation.html.slim:1:in `_app_views_reservations__reservation_html_slim___323309235790978486_69962676339720'
+app/views/computers/reservation.html.slim:15:in `block in _app_views_computers_reservation_html_slim___3718505291829635967_69962569330440'
+app/views/computers/reservation.html.slim:12:in `_app_views_computers_reservation_html_slim___3718505291829635967_69962569330440'
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:26:21 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.3ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (8.6ms)
+  Rendered computers/reservation.html.slim within layouts/application (26.0ms)
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 6.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `date_prepare' for #<Class:0x00007f42dc89edd0>
+Did you mean?  date_prepate):
+    1: -if reservation.show?(@date)
+    2:   div class="reservation #{reservation.id}"
+    3:     p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+    4:     p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+  
+app/models/reservation.rb:17:in `show?'
+app/views/reservations/_reservation.html.slim:1:in `_app_views_reservations__reservation_html_slim___323309235790978486_69962571855620'
+app/views/computers/reservation.html.slim:15:in `block in _app_views_computers_reservation_html_slim___3718505291829635967_69962573256500'
+app/views/computers/reservation.html.slim:12:in `_app_views_computers_reservation_html_slim___3718505291829635967_69962573256500'
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:27:18 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.1ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (7.2ms)
+  Rendered computers/reservation.html.slim within layouts/application (30.3ms)
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 6.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `date_prepare' for #<Reservation:0x00007f42dcb2b710>):
+    1: -if reservation.show?(@date)
+    2:   div class="reservation #{reservation.id}"
+    3:     p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+    4:     p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+  
+app/models/reservation.rb:17:in `show?'
+app/views/reservations/_reservation.html.slim:1:in `_app_views_reservations__reservation_html_slim___323309235790978486_69962573480120'
+app/views/computers/reservation.html.slim:15:in `block in _app_views_computers_reservation_html_slim___3718505291829635967_47321129427520'
+app/views/computers/reservation.html.slim:12:in `_app_views_computers_reservation_html_slim___3718505291829635967_47321129427520'
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:22 +0300
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:24 +0300
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:25 +0300
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:30 +0300
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:34 +0300
+Started PUT "/__web_console/repl_sessions/82c9d3aa4c63845ccf030b479fe0598c" for ::1 at 2019-06-10 15:27:40 +0300
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:27:53 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.3ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.1ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (6.8ms)
+  Rendered computers/reservation.html.slim within layouts/application (24.1ms)
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 6.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `date_prepare' for #<Reservation:0x00007f42dcbc7570>):
+    1: -if reservation.show?(@date)
+    2:   div class="reservation #{reservation.id}"
+    3:     p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+    4:     p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+  
+app/models/reservation.rb:17:in `show?'
+app/views/reservations/_reservation.html.slim:1:in `_app_views_reservations__reservation_html_slim___323309235790978486_69962573864160'
+app/views/computers/reservation.html.slim:15:in `block in _app_views_computers_reservation_html_slim___3718505291829635967_69962575132980'
+app/views/computers/reservation.html.slim:12:in `_app_views_computers_reservation_html_slim___3718505291829635967_69962575132980'
+Started PUT "/__web_console/repl_sessions/374efd0eb1c260ef48e2da38348bb3a6" for ::1 at 2019-06-10 15:28:01 +0300
+Started PUT "/__web_console/repl_sessions/374efd0eb1c260ef48e2da38348bb3a6" for ::1 at 2019-06-10 15:28:03 +0300
+Started PUT "/__web_console/repl_sessions/374efd0eb1c260ef48e2da38348bb3a6" for ::1 at 2019-06-10 15:28:10 +0300
+Started PUT "/__web_console/repl_sessions/374efd0eb1c260ef48e2da38348bb3a6" for ::1 at 2019-06-10 15:28:15 +0300
+Started PUT "/__web_console/repl_sessions/374efd0eb1c260ef48e2da38348bb3a6" for ::1 at 2019-06-10 15:28:15 +0300
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:28:32 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.2ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.1ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (1.8ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 2]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [1 times] (0.1ms)
+  [1m[36mCACHE Computer Load (0.0ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:21
+  Rendered computers/reservation.html.slim within layouts/application (27.3ms)
+  Rendered shared/_nav.html.slim (1.4ms)
+Completed 200 OK in 53ms (Views: 37.8ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/computers/reservation" for ::1 at 2019-06-10 15:29:04 +0300
+Processing by ComputersController#reservation as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/nikitash/.rvm/gems/ruby-2.5.3@computer_club/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  Rendering computers/reservation.html.slim within layouts/application
+  [1m[36mComputer Load (0.3ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:12
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 1]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [2 times] (2.1ms)
+  [1m[36mReservation Load (0.4ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."computer_id" = $1[0m  [["computer_id", 2]]
+  ↳ app/views/computers/reservation.html.slim:15
+  Rendered collection of reservations/_reservation.html.slim [1 times] (0.2ms)
+  [1m[36mCACHE Computer Load (0.0ms)[0m  [1m[34mSELECT "computers".* FROM "computers"[0m
+  ↳ app/views/computers/reservation.html.slim:21
+  Rendered computers/reservation.html.slim within layouts/application (12.0ms)
+  Rendered shared/_nav.html.slim (1.5ms)
+Completed 200 OK in 31ms (Views: 27.6ms | ActiveRecord: 1.1ms)
+
+

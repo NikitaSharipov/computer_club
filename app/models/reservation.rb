@@ -14,16 +14,20 @@ class Reservation < ApplicationRecord
 
   def show?(date)
     #date == start_time.strftime("%-m %d")
-    date = date_prepare(date)
+    date = Reservation.date_prepare(date)
     date.to_date >= start_time.to_date && date.to_date <= end_time.to_date
   end
 
-  def date_prepare(date)
-    if date.split(' ').last.length == 1
-      date.insert(-2, '0')
-    else
-      date
-    end
+  #def date_prepare(date)
+  #  if date.split(' ').last.length == 1
+  #    date.insert(-2, '0')
+  #  else
+  #    date
+  #  end
+  #end
+
+  def self.date_prepare(date)
+    date.split(' ').last.length == 1 ? date.insert(-2, '0') : date
   end
 
   private

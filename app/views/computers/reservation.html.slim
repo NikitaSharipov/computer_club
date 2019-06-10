@@ -6,7 +6,7 @@
 
     p= f.submit 'Show'
 
-  p Show reservations for #{Reservation.first.date_prepare(@date).to_date}
+  p Show reservations for #{Reservation.date_prepare(@date).to_date}
 
 .computers
   -@computers.each do |computer|
