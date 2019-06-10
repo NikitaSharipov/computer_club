@@ -1,0 +1,4 @@
+-if reservation.show?(@date)
+  div class="reservation #{reservation.id}"
+    p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+    p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}

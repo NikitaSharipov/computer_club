@@ -1,0 +1,35 @@
+.reservation_date
+  = form_with url: reservation_computers_path, local: true, html: { id: "choose_date" } do |f|
+    p
+      = f.label :date_reservations, 'Enter date:'
+      = f.date_select :date_reservations, discard_year: true
+
+    p= f.submit 'Show'
+
+  p Show reservations for #{Reservation.date_prepare(@date).to_date}
+
+.computers
+  -@computers.each do |computer|
+    div class="computer_#{computer.id}"
+      h1= computer.title
+      = render computer.reservation
+
+.reservation_form
+  = form_with model: @computer, url: reserve_computers_path , html: { id: "computer-reservation" } do |f|
+    p
+      = f.label :computer, 'Choose computer'
+      = f.collection_select :computer_id, Computer.all, :id, :title
+    p
+      = f.label :date, 'Enter date:'
+      = f.date_select :date, discard_year: true
+
+    p
+      = f.label :start_time, 'Enter start time:'
+      = f.time_field :start_time
+
+    p
+      = f.label :duration, 'Enter duration in hours:'
+      = f.number_field :duration, in: 1..20, step: 1
+
+    p= f.submit 'Make a reservation!'
+

@@ -8,12 +8,9 @@ feature 'User can log out', %q{
   given(:user) { create(:user) }
 
   scenario 'authenticated user tries to sign out' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
+    sign_in(user)
     click_on 'Log out'
-    expect(page).to have_content 'Signed out successfully.'
+    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 
 end
