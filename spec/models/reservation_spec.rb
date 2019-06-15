@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
-
   it { should validate_presence_of :start_time }
   it { should validate_presence_of :end_time }
 
@@ -9,7 +8,6 @@ RSpec.describe Reservation, type: :model do
   it { should belong_to(:user) }
 
   describe 'custom validations' do
-
     let!(:user) { create(:user) }
     let!(:computer) { create(:computer) }
 
@@ -32,7 +30,5 @@ RSpec.describe Reservation, type: :model do
       invalid_reservation.valid?
       expect(invalid_reservation.valid?).to be true
     end
-
   end
-
 end

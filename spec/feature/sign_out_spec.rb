@@ -12,5 +12,4 @@ feature 'User can log out', %q{
     click_on 'Log out'
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
-
 end

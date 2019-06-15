@@ -5,7 +5,6 @@ feature 'User can request a software installation', %q{
   As an authenticated user
   I'd like to be able to leave a request for installation
 } do
-
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
 
@@ -19,5 +18,4 @@ feature 'User can request a software installation', %q{
     click_on 'Send request!'
     expect(page).to have_content 'Your request successfully sent'
   end
-
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :users
 
   resources :computers, only: [:index, :show], shallow: true do
@@ -11,5 +10,4 @@ Rails.application.routes.draw do
 
 
   root to: "computers#index"
-
 end

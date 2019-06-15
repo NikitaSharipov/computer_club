@@ -5,7 +5,6 @@ feature 'User can see the list of computers', %q{
   As an authenticated user
   I'd like to be able to see the list of computers
 } do
-
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
   given!(:computers) { create_list :computer, 3 }
@@ -27,6 +26,4 @@ feature 'User can see the list of computers', %q{
     expect(page).to have_content computer.cost
     expect(page).to have_content computer.creation
   end
-
-
 end

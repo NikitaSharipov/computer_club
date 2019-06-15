@@ -1,5 +1,4 @@
 class ComputersController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
@@ -12,7 +11,7 @@ class ComputersController < ApplicationController
 
   def reservation
     if params["date_reservations(2i)"]
-      @date = params["date_reservations(2i)"] + ' ' +  params["date_reservations(3i)"]
+      @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
     else
       @date = Time.now.strftime("%-m %d")
     end
@@ -20,7 +19,7 @@ class ComputersController < ApplicationController
   end
 
   def computer
-    @computer ||= params[:id] ? Computer.find(params[:id]) : Computer.new
+    @computer = Computer.find(params[:id])
   end
 
   def reserve
@@ -43,7 +42,6 @@ class ComputersController < ApplicationController
   end
 
   def reservation_params
-    params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)" )
+    params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
   end
-
 end
