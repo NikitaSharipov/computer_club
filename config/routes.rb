@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :computers, only: [:index, :show], shallow: true do
     get :reservation, on: :collection
     post :reservation, on: :collection
-    post :reserve, on: :collection
+    post :reserve, on: :member
     resources :software_requests, only: [:create]
   end
 
