@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
+
+  resources :computers, only: [:index, :show], shallow: true do
+    get :reservation, on: :collection
+    post :reservation, on: :collection
+    post :reserve, on: :member
+    resources :software_requests, only: [:create]
+  end
+
+
+  root to: "computers#index"
 end

@@ -1,0 +1,21 @@
+.computer
+  h1= @computer.title
+  p Specification: #{@computer.specifications}
+  p Cost per hour: #{@computer.cost} рублей
+  p Creation date: #{@computer.creation}
+
+  = link_to 'Leave a request for software instalation', '#', class: 'leave-request-link'
+
+
+  = form_with model: [@computer, SoftwareRequest.new], url: computer_software_requests_path(@computer.id), class: 'hidden', html: { id: "computer-request" } do |f|
+      p
+        = f.label :title, 'Software title'
+        = f.text_area :title
+      p
+        = f.label :url, 'Url for downloading'
+        = f.text_area :url
+      p
+        = f.label :description, 'Description'
+        = f.text_area :description
+
+      p= f.submit 'Send request!'

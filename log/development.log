@@ -1,8 +1,0 @@
-  [1m[35m (835.1ms)[0m  [1m[35mCREATE DATABASE "computer_club_development" ENCODING = 'unicode'[0m
-  ↳ bin/rails:9
-  [1m[35m (532.4ms)[0m  [1m[35mCREATE DATABASE "computer_club_test" ENCODING = 'unicode'[0m
-  ↳ bin/rails:9
-  [1m[35m (2.1ms)[0m  [1m[35mCREATE DATABASE "computer_club_development" ENCODING = 'unicode'[0m
-  ↳ bin/rails:9
-  [1m[35m (1.1ms)[0m  [1m[35mCREATE DATABASE "computer_club_test" ENCODING = 'unicode'[0m
-  ↳ bin/rails:9
