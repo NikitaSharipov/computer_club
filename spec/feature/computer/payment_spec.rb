@@ -7,7 +7,9 @@ feature 'User can pay for a computer', %q{
 } do
 
   given(:user) { create :user }
+  #given(:user_low_credits) { create :user, :low_credits}
   given!(:computer) { create(:computer) }
+  given!(:reservation) { create(:reservation, computer: computer, user: user) }
   given!(:reservation) { create(:reservation, computer: computer, user: user) }
 
   background { sign_in(user) }
@@ -16,6 +18,14 @@ feature 'User can pay for a computer', %q{
     visit payment_computers_path
     click_on "Pay now!"
     expect(page).to have_content("Payment made")
+  end
+
+  scenario "User don't have enough credits" do
+    user.credits = 1
+    user.save
+    visit payment_computers_path
+    click_on "Pay now!"
+    expect(page).to have_content("Payment error")
   end
 
 end

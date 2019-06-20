@@ -18,6 +18,8 @@
                 = form_with model: @computer, url: pay_computer_path(computer) , html: { id: "computer-pay" } do |f|
                   p
                     = f.hidden_field :reservation, value: reservation.id
+                  p
+                    = f.hidden_field :cost, value: computer.cost
                   p= f.submit 'Pay now!'
 
 

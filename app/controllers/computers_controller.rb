@@ -54,10 +54,15 @@ class ComputersController < ApplicationController
   end
 
   def pay
+    cost = params[:cost]
     reservation_id = params[:reservation]
     reservation = Reservation.where(id: reservation_id).first
-    reservation.update(:payed => true)
-    redirect_to payment_computers_path
+    if current_user.credit_withdrawal(cost.to_i)
+      reservation.update(:payed => true)
+      redirect_to payment_computers_path, notice: 'Successful payment'
+    else
+      redirect_to payment_computers_path, notice: 'Payment error'
+    end
   end
 
   private

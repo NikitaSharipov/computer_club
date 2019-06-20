@@ -8,4 +8,19 @@ class User < ApplicationRecord
   has_many :reservation, dependent: :destroy
 
   validates :credits, presence: true
+
+  def payment_possibility?(cost)
+    cost <= credits
+  end
+
+  def credit_withdrawal(cost)
+    if payment_possibility?(cost)
+      self.credits -= cost
+      self.save!
+      return true
+    else
+      return false
+    end
+  end
+
 end
