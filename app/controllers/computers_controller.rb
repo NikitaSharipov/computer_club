@@ -41,7 +41,32 @@ class ComputersController < ApplicationController
     end
   end
 
+  def payment
+    #@users_computer_with_reservations = [com1, com3]
+    @involved_reservations = Reservation.where(user: current_user)
+
+    @involved_computers = []
+    @involved_reservations.each do |reservation|
+      unless @involved_computers.include?(reservation.computer)
+        @involved_computers << reservation.computer
+      end
+    end
+  end
+
+  def pay
+    reservation_id = params[:reservation]
+    reservation = Reservation.where(id: reservation_id).first
+    reservation.update(:payed => true)
+    redirect_to payment_computers_path
+  end
+
+  private
+
   def reservation_params
     params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
   end
+
+  #def payement_params
+  #  params.permit(:reservation)
+  #end
 end

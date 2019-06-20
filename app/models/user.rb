@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :software_request, dependent: :destroy
   has_many :reservation, dependent: :destroy
+
+  validates :credits, presence: true
 end

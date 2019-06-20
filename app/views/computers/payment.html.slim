@@ -1,0 +1,23 @@
+.reservations
+  .computers
+    -@involved_computers.each do |computer|
+      div class="computer_#{computer.id}"
+        h1= computer.title
+        -computer.reservation.each do |reservation|
+          -if reservation.show_further?
+            div class="reservation #{reservation.id}"
+              p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+              p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+              p Reservation duration: #{reservation.duration_hours}
+              p Computer cost: #{computer.cost} credits per hour
+              -if reservation.payed
+                p Payment made
+              -else
+                p You need to pay #{reservation.sum_pay(computer.cost)} credits
+                //=link_to "Pay now!", pay_computer_path(computer)
+                = form_with model: @computer, url: pay_computer_path(computer) , html: { id: "computer-pay" } do |f|
+                  p
+                    = f.hidden_field :reservation, value: reservation.id
+                  p= f.submit 'Pay now!'
+
+

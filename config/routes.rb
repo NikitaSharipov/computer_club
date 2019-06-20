@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     post :reservation, on: :collection
     post :reserve, on: :member
     resources :software_requests, only: [:create]
+    get :payment, on: :collection
+    post :pay, on: :member
   end
 
 
