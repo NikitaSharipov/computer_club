@@ -6,6 +6,7 @@ feature 'User can book a computer', %q{
   I'd like to be able to book a computer
 } do
   given(:user) { create :user }
+  given(:user2) { create :user }
   given!(:computer) { create(:computer) }
 
   background { sign_in(user) }
@@ -41,13 +42,17 @@ feature 'User can book a computer', %q{
     visit reservation_computers_path
     select(computer.title, from: 'computer_id')
 
-    select('May', from: '_date_2i')
-    select('30', from: "_date_3i")
+    date = Date.today
+
+    select("#{date.strftime("%B")}", from: '_date_2i')
+    select("#{date.strftime("%d")}", from: "_date_3i")
 
     fill_in 'start_time', with: "15:00"
     fill_in 'duration', with: "1"
 
     click_on 'Make a reservation!'
+
+    expect(Reservation.count).to eq(1)
 
     expect(page).to have_content('You reserved a computer.')
   end
@@ -68,4 +73,41 @@ feature 'User can book a computer', %q{
 
     expect(Reservation.count).to eq(1)
   end
+
+  context "multiply questions", js: true do
+    scenario "reservation appears on another user's page" do
+      Capybara.using_session('user') do
+        sign_in(user)
+        visit reservation_computers_path
+      end
+
+      Capybara.using_session('guest') do
+        sign_in(user2)
+        visit reservation_computers_path
+      end
+
+      Capybara.using_session('user') do
+        select(computer.title, from: 'computer_id')
+
+        select("#{Date.today.strftime("%B")}", from: '_date_2i')
+        select("#{Date.today.strftime("%d")}", from: "_date_3i")
+
+
+        fill_in 'start_time', with: "15:00"
+        fill_in 'duration', with: "1"
+
+        click_on 'Make a reservation!'
+
+
+        expect(page).to have_content 'You reserved a computer'
+        expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+      end
+
+      Capybara.using_session('guest') do
+        expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+      end
+    end
+  end
+
+
 end
