@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     post :pay, on: :member
   end
 
+  resources :users do
+    get :account_replenish, on: :collection
+    post :replenish, on: :member
+  end
+
   root to: "computers#index"
 
   mount ActionCable.server => '/cable'
