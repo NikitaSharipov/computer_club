@@ -1,6 +1,8 @@
 class ComputersController < ApplicationController
   before_action :authenticate_user!
 
+  after_action :publish_reservation, only: [:reserve]
+
   def index
     @computers = Computer.all
   end
@@ -23,6 +25,7 @@ class ComputersController < ApplicationController
   end
 
   def reserve
+
     @reservation = Reservation.new
     @reservation.computer_id = params[:computer_id]
     @reservation.user_id = current_user.id
@@ -71,7 +74,14 @@ class ComputersController < ApplicationController
     params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
   end
 
-  #def payement_params
-  #  params.permit(:reservation)
-  #end
+  def publish_reservation
+    return if @reservation.errors.any?
+    ActionCable.server.broadcast(
+      'reservations',
+      ApplicationController.render(
+        partial: 'reservations/reservation',
+        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%-m %d") }
+      )
+    )
+  end
 end

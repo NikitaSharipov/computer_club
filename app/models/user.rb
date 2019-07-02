@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   validates :credits, presence: true
 
+  def replenish(credits_income)
+    self.credits += credits_income
+  end
+
   def payment_possibility?(cost)
     cost <= credits
   end

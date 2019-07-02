@@ -15,3 +15,15 @@ $(document).on('turbolinks:load', function(){
       });
 
 });
+
+App.cable.subscriptions.create('ReservationsChannel', {
+  connected: function() {
+    this.perform('follow');
+  },
+
+  received: function(data) {
+    var positionNumber = data.search("id")+3;
+    var computerReservationId = data.charAt(positionNumber);
+    $('.computer_' + computerReservationId).append(data);
+  }
+});
