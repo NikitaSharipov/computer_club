@@ -45,7 +45,7 @@ feature 'User can book a computer', %q{
     date = Date.today
 
     select("#{date.strftime("%B")}", from: '_date_2i')
-    select("#{date.strftime("%d")}", from: "_date_3i")
+    select("#{date.strftime("%-d")}", from: "_date_3i")
 
     fill_in 'start_time', with: "15:00"
     fill_in 'duration', with: "1"
@@ -90,7 +90,7 @@ feature 'User can book a computer', %q{
         select(computer.title, from: 'computer_id')
 
         select("#{Date.today.strftime("%B")}", from: '_date_2i')
-        select("#{Date.today.strftime("%d")}", from: "_date_3i")
+        select("#{Date.today.strftime("%-d")}", from: "_date_3i")
 
 
         fill_in 'start_time', with: "15:00"

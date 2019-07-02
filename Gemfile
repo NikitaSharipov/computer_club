@@ -31,6 +31,10 @@ gem 'slim'
 gem 'bootstrap'
 gem 'jquery-rails'
 
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'whenever', require: false
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
