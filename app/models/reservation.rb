@@ -3,8 +3,9 @@ class Reservation < ApplicationRecord
   belongs_to :computer
 
   validates :start_time, :end_time, presence: true
+  validates_inclusion_of :payed, in: [true, false]
 
-  validate :validate_sequence, :validate_intersection
+  validate :validate_sequence, :validate_intersection, :on => :create
 
   # scope :by_date, -> (date_input) { where(start_time: date_input)}
 
@@ -18,16 +19,21 @@ class Reservation < ApplicationRecord
     date.to_date >= start_time.to_date && date.to_date <= end_time.to_date
   end
 
-  # def date_prepare(date)
-  #  if date.split(' ').last.length == 1
-  #    date.insert(-2, '0')
-  #  else
-  #    date
-  #  end
-  # end
+  def show_further?
+    date = Reservation.date_prepare(Time.now.strftime("%-m %d"))
+    date.to_date <= start_time.to_date
+  end
 
   def self.date_prepare(date)
     date.split(' ').last.length == 1 ? date.insert(-2, '0') : date
+  end
+
+  def duration_hours
+    ((end_time - start_time) / 3600).to_i
+  end
+
+  def sum_pay(cost)
+    cost * duration_hours
   end
 
   private

@@ -1,6 +1,8 @@
 class ComputersController < ApplicationController
   before_action :authenticate_user!
 
+  after_action :publish_reservation, only: [:reserve]
+
   def index
     @computers = Computer.all
   end
@@ -23,6 +25,7 @@ class ComputersController < ApplicationController
   end
 
   def reserve
+
     @reservation = Reservation.new
     @reservation.computer_id = params[:computer_id]
     @reservation.user_id = current_user.id
@@ -41,7 +44,44 @@ class ComputersController < ApplicationController
     end
   end
 
+  def payment
+    #@users_computer_with_reservations = [com1, com3]
+    @involved_reservations = Reservation.where(user: current_user)
+
+    @involved_computers = []
+    @involved_reservations.each do |reservation|
+      unless @involved_computers.include?(reservation.computer)
+        @involved_computers << reservation.computer
+      end
+    end
+  end
+
+  def pay
+    cost = params[:cost]
+    reservation_id = params[:reservation]
+    reservation = Reservation.where(id: reservation_id).first
+    if current_user.credit_withdrawal(cost.to_i)
+      reservation.update(:payed => true)
+      redirect_to payment_computers_path, notice: 'Successful payment'
+    else
+      redirect_to payment_computers_path, notice: 'Payment error'
+    end
+  end
+
+  private
+
   def reservation_params
     params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
+  end
+
+  def publish_reservation
+    return if @reservation.errors.any?
+    ActionCable.server.broadcast(
+      'reservations',
+      ApplicationController.render(
+        partial: 'reservations/reservation',
+        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%-m %d") }
+      )
+    )
   end
 end

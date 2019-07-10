@@ -1,0 +1,7 @@
+.replenish_form
+  = form_with url: replenish_user_path(current_user), html: { id: "replenish-user" } do |f|
+    p
+      = f.label :credits, 'How many credits do you want to fund?'
+      = f.number_field :credits
+
+    p= f.submit 'Replenish!'

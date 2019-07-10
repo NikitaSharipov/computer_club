@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_26_103937) do
+ActiveRecord::Schema.define(version: 2019_07_02_132256) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +20,9 @@ ActiveRecord::Schema.define(version: 2019_05_26_103937) do
     t.text "specifications"
     t.integer "cost", null: false
     t.datetime "creation", null: false
+    t.datetime "last_service"
+    t.integer "service_frequency", default: 9
+    t.boolean "service_needed", default: false
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -26,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_103937) do
     t.bigint "user_id"
     t.datetime "start_time", null: false
     t.datetime "end_time", null: false
+    t.boolean "payed", default: false
     t.index ["computer_id"], name: "index_reservations_on_computer_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -49,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_05_26_103937) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "credits", default: 0
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
