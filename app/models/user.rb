@@ -18,13 +18,17 @@ class User < ApplicationRecord
   end
 
   def credit_withdrawal(cost)
-    if payment_possibility?(cost)
-      self.credits -= cost
-      self.save!
-      return true
-    else
-      return false
-    end
+    return false unless payment_possibility?(cost)
+    self.credits -= cost
+    self.save!
+    true
+    #  if payment_possibility?(cost)
+    #    self.credits -= cost
+    #    self.save!
+    #    true
+    #  else
+    #    return false
+    #  end
   end
 
 end
