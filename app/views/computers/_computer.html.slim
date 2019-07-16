@@ -1,3 +1,5 @@
 div class="computer_title#{computer.id}"
   = computer.title
   =link_to 'Show', computer, class: 'btn btn-link'
+  -if current_user.admin
+    = link_to 'Delete', computer, method: :delete, class: 'btn btn-link'

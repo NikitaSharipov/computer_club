@@ -54,6 +54,7 @@ feature 'User can book a computer', %q{
 
     expect(Reservation.count).to eq(1)
 
+    save_and_open_page
     expect(page).to have_content('You reserved a computer.')
   end
 

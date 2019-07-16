@@ -13,4 +13,8 @@ FactoryBot.define do
   trait :low_credits do
     credits { 1 }
   end
+
+  trait :admin do
+    admin { true }
+  end
 end
