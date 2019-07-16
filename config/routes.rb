@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :computers, only: [:index, :show], shallow: true do
+  resources :computers, only: [:index, :show, :create, :destroy], shallow: true do
     get :reservation, on: :collection
     post :reservation, on: :collection
     post :reserve, on: :member

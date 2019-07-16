@@ -11,6 +11,22 @@ class ComputersController < ApplicationController
     computer
   end
 
+  def create
+    @computer = Computer.new(computer_params)
+    if @computer.save
+      redirect_to computers_path, notice: 'You have added a computer'
+    else
+      @computer.valid?
+      redirect_to computers_path, notice: "#{@computer.errors.full_messages}"
+    end
+  end
+
+  def destroy
+    computer.destroy
+    flash[:notice] = 'You successfully delete computer.'
+    redirect_to computers_path
+  end
+
   def reservation
     if params["date_reservations(2i)"]
       @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
@@ -69,6 +85,10 @@ class ComputersController < ApplicationController
   end
 
   private
+
+  def computer_params
+    params.permit(:title, :specifications, :cost, :creation, :last_service, :service_frequency)
+  end
 
   def reservation_params
     params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
