@@ -5,9 +5,16 @@ class UsersController < ApplicationController
   end
 
   def replenish
-    current_user.replenish(params["credits"].to_i)
-    current_user.save
-    redirect_to account_replenish_users_path, notice: 'You replenish your account.'
+
+    if params["user_id"]
+      user = User.where(id: params["user_id"]).first
+    else
+      user = current_user
+    end
+
+    user.replenish(params["credits"].to_i)
+    user.save
+    redirect_back fallback_location: root_path, notice: 'Account replenished.'
   end
 
 end
