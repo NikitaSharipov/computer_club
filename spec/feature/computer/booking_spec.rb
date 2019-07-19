@@ -5,108 +5,145 @@ feature 'User can book a computer', %q{
   As an authenticated user
   I'd like to be able to book a computer
 } do
-  given(:user) { create :user }
-  given(:user2) { create :user }
-  given!(:computer) { create(:computer) }
 
-  background { sign_in(user) }
+  describe 'User' do
 
-  describe 'User ' do
-    given(:date_now) { Time.now }
+    given(:user) { create :user }
+    given(:user2) { create :user }
+    given!(:computer) { create(:computer) }
 
-    background do
-      reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
+    background { sign_in(user) }
+
+    describe 'reservations' do
+      given(:date_now) { Time.now }
+
+      background do
+        reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
+        visit reservation_computers_path
+      end
+
+      scenario 'sees current reservations on сertain date' do
+        select((date_now).strftime("%B"), from: '_date_reservations_2i')
+        select("#{date_now.day  }", from: "_date_reservations_3i")
+
+        click_on 'Show'
+
+        expect(page).to have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+      end
+
+      scenario "don't sees reservations on other date" do
+        select((date_now).strftime("%B"), from: '_date_reservations_2i')
+        select('11', from: "_date_reservations_3i")
+
+        click_on 'Show'
+
+        expect(page).to_not have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+      end
+    end
+
+    scenario 'User tries to book a computer' do
       visit reservation_computers_path
+      select(computer.title, from: 'computer_id')
+
+      date = Date.today
+
+      select("#{date.strftime("%B")}", from: '_date_2i')
+      select("#{date.strftime("%-d")}", from: "_date_3i")
+
+      fill_in 'start_time', with: "15:00"
+      fill_in 'duration', with: "1"
+
+      click_on 'Make a reservation!'
+
+      expect(Reservation.count).to eq(1)
+
+      expect(page).to have_content('You reserved a computer.')
     end
 
-    scenario 'sees current reservations on сertain date' do
-      select((date_now).strftime("%B"), from: '_date_reservations_2i')
-      select("#{date_now.day  }", from: "_date_reservations_3i")
+    scenario 'Computer alredy reserved' do
+      reservation = Reservation.create(start_time: "2019-5-30 15:00:00", end_time: "2019-5-30 16:00:00", user: user, computer: computer)
 
-      click_on 'Show'
+      visit reservation_computers_path
+      select(computer.title, from: 'computer_id')
 
-      expect(page).to have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+      select('May', from: '_date_2i')
+      select('30', from: "_date_3i")
+
+      fill_in 'start_time', with: "15:00"
+      fill_in 'duration', with: "1"
+
+      click_on 'Make a reservation!'
+
+      expect(Reservation.count).to eq(1)
     end
 
-    scenario "don't sees reservations on other date" do
-      select((date_now).strftime("%B"), from: '_date_reservations_2i')
-      select('11', from: "_date_reservations_3i")
+    context "multiply questions", js: true do
+      scenario "reservation appears on another user's page" do
+        Capybara.using_session('user') do
+          sign_in(user)
+          visit reservation_computers_path
+        end
 
-      click_on 'Show'
+        Capybara.using_session('guest') do
+          sign_in(user2)
+          visit reservation_computers_path
+        end
 
-      expect(page).to_not have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+        Capybara.using_session('user') do
+          select(computer.title, from: 'computer_id')
+
+          select("#{Date.today.strftime("%B")}", from: '_date_2i')
+          select("#{Date.today.strftime("%-d")}", from: "_date_3i")
+
+
+          fill_in 'start_time', with: "15:00"
+          fill_in 'duration', with: "1"
+
+          click_on 'Make a reservation!'
+
+
+          expect(page).to have_content 'You reserved a computer'
+          expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+        end
+
+        Capybara.using_session('guest') do
+          expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+        end
+      end
     end
+
   end
 
-  scenario 'User tries to book a computer' do
-    visit reservation_computers_path
-    select(computer.title, from: 'computer_id')
+  describe 'Admin ' do
 
-    date = Date.today
+    given(:admin) { create :user, :admin  }
+    given!(:computer) { create(:computer) }
 
-    select("#{date.strftime("%B")}", from: '_date_2i')
-    select("#{date.strftime("%-d")}", from: "_date_3i")
+    background { sign_in(admin) }
 
-    fill_in 'start_time', with: "15:00"
-    fill_in 'duration', with: "1"
+    scenario 'can reserve computer for user' do
+      visit admin_panel_path
+      click_on "Reserve computer"
 
-    click_on 'Make a reservation!'
+      select(admin.email, from: 'user_id')
+      select(computer.title, from: 'computer_id')
 
-    expect(Reservation.count).to eq(1)
+      date = Date.today
 
-    expect(page).to have_content('You reserved a computer.')
-  end
+      select("#{date.strftime("%B")}", from: '_date_2i')
+      select("#{date.strftime("%-d")}", from: "_date_3i")
 
-  scenario 'Computer alredy reserved' do
-    reservation = Reservation.create(start_time: "2019-5-30 15:00:00", end_time: "2019-5-30 16:00:00", user: user, computer: computer)
+      fill_in 'start_time', with: "15:00"
+      fill_in 'duration', with: "1"
 
-    visit reservation_computers_path
-    select(computer.title, from: 'computer_id')
+      click_on 'Make a reservation!'
 
-    select('May', from: '_date_2i')
-    select('30', from: "_date_3i")
+      expect(Reservation.count).to eq(1)
 
-    fill_in 'start_time', with: "15:00"
-    fill_in 'duration', with: "1"
+      expect(page).to have_content('You reserved a computer.')
 
-    click_on 'Make a reservation!'
-
-    expect(Reservation.count).to eq(1)
-  end
-
-  context "multiply questions", js: true do
-    scenario "reservation appears on another user's page" do
-      Capybara.using_session('user') do
-        sign_in(user)
-        visit reservation_computers_path
-      end
-
-      Capybara.using_session('guest') do
-        sign_in(user2)
-        visit reservation_computers_path
-      end
-
-      Capybara.using_session('user') do
-        select(computer.title, from: 'computer_id')
-
-        select("#{Date.today.strftime("%B")}", from: '_date_2i')
-        select("#{Date.today.strftime("%-d")}", from: "_date_3i")
-
-
-        fill_in 'start_time', with: "15:00"
-        fill_in 'duration', with: "1"
-
-        click_on 'Make a reservation!'
-
-
-        expect(page).to have_content 'You reserved a computer'
-        expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
-      end
-
-      Capybara.using_session('guest') do
-        expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
-      end
     end
+
   end
 
 

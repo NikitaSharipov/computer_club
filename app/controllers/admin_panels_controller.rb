@@ -4,7 +4,7 @@ class AdminPanelsController < ApplicationController
 
   end
 
-  def account_replenish
+  def reservation
 
   end
 

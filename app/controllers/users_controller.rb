@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   end
 
   def replenish
-
-    if params["user_id"]
-      user = User.where(id: params["user_id"]).first
-    else
-      user = current_user
-    end
+    user =
+      if params["user_id"]
+        User.where(id: params["user_id"]).first
+      else
+        current_user
+      end
 
     user.replenish(params["credits"].to_i)
     user.save

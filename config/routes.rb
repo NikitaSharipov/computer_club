@@ -23,9 +23,7 @@ Rails.application.routes.draw do
     #get :admin_panel, on: :collection
   end
 
-  resource :admin_panel, only: [:show] do
-    get :account_replenish, on: :collection
-  end
+  resource :admin_panel, only: [:show]
 
   root to: "computers#index"
 

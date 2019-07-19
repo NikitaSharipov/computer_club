@@ -16,6 +16,10 @@
 
 .reservation_form
   = form_with model: @computer, url: reserve_computer_path(Computer.first), html: { id: "computer-reservation" } do |f|
+    -if current_user.admin?
+      p
+        = f.label :user, 'Choose user'
+        = f.collection_select :user_id, User.all, :id, :email
     p
       = f.label :computer, 'Choose computer'
       = f.collection_select :computer_id, Computer.all, :id, :title
