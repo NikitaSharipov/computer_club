@@ -20,10 +20,13 @@ Rails.application.routes.draw do
   resources :users do
     get :account_replenish, on: :collection
     post :replenish, on: :member
-    #get :admin_panel, on: :collection
   end
 
-  resource :admin_panel, only: [:show]
+  resource :admin_panel, only: [:show] do
+    get :reservation, on: :collection
+  end
+
+  resources :reservations, only: [:destroy]
 
   root to: "computers#index"
 

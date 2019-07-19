@@ -118,6 +118,7 @@ feature 'User can book a computer', %q{
 
     given(:admin) { create :user, :admin  }
     given!(:computer) { create(:computer) }
+    given(:date_now) { Time.now }
 
     background { sign_in(admin) }
 
@@ -142,6 +143,14 @@ feature 'User can book a computer', %q{
 
       expect(page).to have_content('You reserved a computer.')
 
+    end
+
+    scenario 'can remove reservation' do
+      reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: admin, computer: computer)
+      visit admin_panel_path
+      click_on "Reservations"
+      click_on "Delete"
+      expect(Reservation.count).to eq(0)
     end
 
   end
