@@ -5,3 +5,11 @@
     p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
     -if current_user.admin?
       =link_to "Delete", reservation, method: :delete, class: 'btn btn-link'
+      -if reservation.payed
+        p Payment made
+      -else
+        p User need to pay #{reservation.sum_pay(reservation.computer.cost)} credits
+        = form_with url: pay_computer_path(reservation.computer) , html: { id: "computer-pay" } do |f|
+          p
+            = f.hidden_field :reservation, value: reservation.id
+          p= f.submit 'Close debt'

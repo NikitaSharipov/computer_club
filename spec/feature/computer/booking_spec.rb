@@ -120,10 +120,13 @@ feature 'User can book a computer', %q{
     given!(:computer) { create(:computer) }
     given(:date_now) { Time.now }
 
-    background { sign_in(admin) }
+    background do
+      sign_in(admin)
+      visit admin_panel_path
+    end
 
     scenario 'can reserve computer for user' do
-      visit admin_panel_path
+
       click_on "Reserve computer"
 
       select(admin.email, from: 'user_id')
@@ -147,10 +150,16 @@ feature 'User can book a computer', %q{
 
     scenario 'can remove reservation' do
       reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: admin, computer: computer)
-      visit admin_panel_path
       click_on "Reservations"
       click_on "Delete"
       expect(Reservation.count).to eq(0)
+    end
+
+    scenario 'can close debt' do
+      reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: admin, computer: computer)
+      click_on "Reservations"
+      click_on "Close debt"
+      expect(page).to have_content('Successful payment')
     end
 
   end
