@@ -1,7 +1,7 @@
 class AdminPanelsController < ApplicationController
 
   def show
-
+    authorize! :show, :admin_panel
   end
 
   def reservation

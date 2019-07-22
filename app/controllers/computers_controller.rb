@@ -3,6 +3,8 @@ class ComputersController < ApplicationController
 
   after_action :publish_reservation, only: [:reserve]
 
+  authorize_resource
+
   def index
     @computers = Computer.all
   end

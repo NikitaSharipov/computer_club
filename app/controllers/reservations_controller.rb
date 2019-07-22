@@ -1,4 +1,7 @@
 class ReservationsController < ApplicationController
+
+  authorize_resource
+
   def destroy
     reservation.destroy
     flash[:notice] = 'You successfully delete reservation.'
