@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     post :replenish, on: :member
   end
 
+  resource :admin_panel, only: [:show] do
+    get :reservation, on: :collection
+  end
+
+  resources :reservations, only: [:destroy]
+
   root to: "computers#index"
 
   mount ActionCable.server => '/cable'

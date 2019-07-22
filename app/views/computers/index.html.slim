@@ -1,6 +1,6 @@
 .computers
   = render @computers
-  -if current_user.admin
+  -if can?(:create, Computer)
     //p= link_to 'Add computer', new_computer_path, class: 'btn btn-link'
     = link_to 'Add computer', '#', class: 'add-computer-link'
   = form_with model: @computer, class: 'hidden', html: { id: "add-computer" } do |f|

@@ -3,6 +3,8 @@ class ComputersController < ApplicationController
 
   after_action :publish_reservation, only: [:reserve]
 
+  authorize_resource
+
   def index
     @computers = Computer.all
   end
@@ -44,7 +46,12 @@ class ComputersController < ApplicationController
 
     @reservation = Reservation.new
     @reservation.computer_id = params[:computer_id]
-    @reservation.user_id = current_user.id
+    @reservation.user =
+      if params["user_id"]
+        User.where(id: params["user_id"]).first
+      else
+        current_user
+      end
 
     start_time = params[:start_time].to_datetime.change(month: params["date(2i)"].to_i, day: params["date(3i)"].to_i)
 
@@ -73,14 +80,14 @@ class ComputersController < ApplicationController
   end
 
   def pay
-    cost = params[:cost]
     reservation_id = params[:reservation]
     reservation = Reservation.where(id: reservation_id).first
+    cost = reservation.computer.cost
     if current_user.credit_withdrawal(cost.to_i)
       reservation.update(:payed => true)
-      redirect_to payment_computers_path, notice: 'Successful payment'
+      redirect_back fallback_location: root_path, notice: 'Successful payment'
     else
-      redirect_to payment_computers_path, notice: 'Payment error'
+      redirect_back fallback_location: root_path, notice: 'Payment error'
     end
   end
 
