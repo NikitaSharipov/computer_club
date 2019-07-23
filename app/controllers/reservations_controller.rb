@@ -1,6 +1,45 @@
 class ReservationsController < ApplicationController
 
-  authorize_resource
+  after_action :publish_reservation, only: [:create]
+
+  load_and_authorize_resource
+
+  def index
+    @date = Time.now.strftime("%-m %d")
+    @computers = Computer.all
+  end
+
+  def date
+    @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
+    @computers = Computer.all
+
+    render :index
+  end
+
+  def create
+
+    @reservation = Reservation.new
+    @reservation.computer_id = params[:computer_id]
+    @reservation.user =
+      if params["user_id"]
+        User.where(id: params["user_id"]).first
+      else
+        current_user
+      end
+
+    start_time = params[:start_time].to_datetime.change(month: params["date(2i)"].to_i, day: params["date(3i)"].to_i)
+
+    @reservation.start_time = start_time
+
+    @reservation.end_time_calculation(params[:duration].to_i)
+
+    if @reservation.valid?
+      @reservation.save!
+      redirect_to reservations_path, notice: 'You reserved a computer.'
+    else
+      redirect_to reservations_path, notice: "#{@reservation.errors.full_messages}"
+    end
+  end
 
   def destroy
     reservation.destroy
@@ -8,7 +47,20 @@ class ReservationsController < ApplicationController
     redirect_to reservation_admin_panel_path
   end
 
+  private
+
   def reservation
     @reservation = Reservation.find(params[:id])
+  end
+
+  def publish_reservation
+    return if @reservation.errors.any?
+    ActionCable.server.broadcast(
+      'reservations',
+      ApplicationController.render(
+        partial: 'reservations/reservation',
+        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%-m %d") }
+      )
+    )
   end
 end
