@@ -11,18 +11,20 @@ describe Ability do
 
   describe 'for user' do
     let(:user) { create :user }
-    let(:other) { create :user }
+    #let(:other) { create :user }
 
     it { should_not be_able_to :manage, :all }
 
     it { should be_able_to :read, Computer }
-    it { should be_able_to :reservation, Computer }
     it { should be_able_to :payment, Computer }
 
-    it { should be_able_to :reserve, Computer }
     it { should be_able_to :pay, Computer }
 
-    #it { should_not be_able_to :reserve, Computer, user_id: other.id }
+    it { should be_able_to :index, Reservation }
+    it { should be_able_to :date, Reservation }
+
+    it { should be_able_to :create, Reservation, user_id: user.id }
+    #it { should_not be_able_to :create, Reservation, user_id: other.id }
 
     it { should be_able_to :create, SoftwareRequest }
 

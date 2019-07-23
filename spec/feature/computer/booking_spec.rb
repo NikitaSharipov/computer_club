@@ -19,7 +19,7 @@ feature 'User can book a computer', %q{
 
       background do
         reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
-        visit reservation_computers_path
+        visit reservations_path
       end
 
       scenario 'sees current reservations on сertain date' do
@@ -42,7 +42,7 @@ feature 'User can book a computer', %q{
     end
 
     scenario 'User tries to book a computer' do
-      visit reservation_computers_path
+      visit reservations_path
       select(computer.title, from: 'computer_id')
 
       date = Date.today
@@ -63,7 +63,7 @@ feature 'User can book a computer', %q{
     scenario 'Computer alredy reserved' do
       reservation = Reservation.create(start_time: "2019-5-30 15:00:00", end_time: "2019-5-30 16:00:00", user: user, computer: computer)
 
-      visit reservation_computers_path
+      visit reservations_path
       select(computer.title, from: 'computer_id')
 
       select('May', from: '_date_2i')
@@ -81,12 +81,12 @@ feature 'User can book a computer', %q{
       scenario "reservation appears on another user's page" do
         Capybara.using_session('user') do
           sign_in(user)
-          visit reservation_computers_path
+          visit reservations_path
         end
 
         Capybara.using_session('guest') do
           sign_in(user2)
-          visit reservation_computers_path
+          visit reservations_path
         end
 
         Capybara.using_session('user') do
