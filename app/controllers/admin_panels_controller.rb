@@ -5,6 +5,7 @@ class AdminPanelsController < ApplicationController
   end
 
   def reservation
+    authorize! :reservation, :admin_panel
     if params["date_reservations(2i)"]
       @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
     else

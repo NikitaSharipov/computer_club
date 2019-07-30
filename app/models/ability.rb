@@ -30,6 +30,8 @@ class Ability
     can [:create], SoftwareRequest
 
     can  :replenish, :account
+    can :reservations, User, user_id: user.id
+    can :destroy, Reservation, user_id: user.id
   end
 
   def guest_abilities

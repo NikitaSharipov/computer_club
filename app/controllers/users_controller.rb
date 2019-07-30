@@ -18,4 +18,9 @@ class UsersController < ApplicationController
     redirect_back fallback_location: root_path, notice: 'Account replenished.'
   end
 
+  def reservations
+    authorize! :reservations, User
+    @user = User.find(params[:id])
+  end
+
 end

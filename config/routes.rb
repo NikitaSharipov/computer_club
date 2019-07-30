@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :computers, only: [:index, :show, :create, :destroy], shallow: true do
-    get :reservation, on: :collection
+    #get :reservation, on: :collection
     #post :reservation, on: :collection
     #post :reserve, on: :member
     resources :software_requests, only: [:create]
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :users do
     get :account_replenish, on: :collection
     post :replenish, on: :member
+    get :reservations, on: :member
   end
 
   resource :admin_panel, only: [:show] do
