@@ -1,0 +1,6 @@
+- @user.reservation.each do |reservation|
+  div id= "reservation #{reservation.id}"
+    -if reservation.show_further?
+      p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+      p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+      =link_to "Delete", reservation, method: :delete, class: 'btn btn-link'

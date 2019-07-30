@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :users do
     get :account_replenish, on: :collection
     post :replenish, on: :member
+    get :reservations, on: :member
   end
 
   resource :admin_panel, only: [:show] do
