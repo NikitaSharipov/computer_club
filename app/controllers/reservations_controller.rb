@@ -46,6 +46,13 @@ class ReservationsController < ApplicationController
     redirect_back fallback_location: root_path, notice: 'You successfully delete reservation.'
   end
 
+  def payment
+    @involved_reservations = Reservation.where(user: current_user)
+
+    @involved_computers =
+      @involved_reservations.map { |reservation| reservation.computer }.uniq
+  end
+
   def pay
     cost = @reservation.computer.cost
     if current_user.credit_withdrawal(cost.to_i)

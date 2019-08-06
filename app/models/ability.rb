@@ -21,9 +21,9 @@ class Ability
 
   def user_abilities
     #guest_abilities
-    can [:read, :payment], Computer
+    can [:read], Computer
 
-    can [:index, :date], Reservation
+    can [:index, :date, :payment], Reservation
     can [:create, :destroy, :pay], Reservation, user_id: user.id
 
     can [:create], SoftwareRequest
