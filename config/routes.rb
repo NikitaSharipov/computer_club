@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     #post :reserve, on: :member
     resources :software_requests, only: [:create]
     get :payment, on: :collection
-    post :pay, on: :member
+    #post :pay, on: :member
   end
 
   resources :users do
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   resources :reservations, only: [:index, :destroy, :create] do
     post :date, on: :collection
+    post :pay, on: :member
   end
 
   root to: "computers#index"

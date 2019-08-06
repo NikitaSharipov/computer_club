@@ -5,25 +5,46 @@ feature 'User can see the list of computers', %q{
   As an authenticated user
   I'd like to be able to see the list of computers
 } do
-  given(:user) { create :user }
+
   given!(:computer) { create(:computer) }
   given!(:computers) { create_list :computer, 3 }
 
-  background { sign_in(user) }
+  context 'User' do
+    given(:user) { create :user }
 
-  scenario 'User tries to see a computer list' do
-    visit computers_path
-    computers.each do |q|
-      expect(page).to have_content q.title
+    background { sign_in(user) }
+
+    scenario 'User tries to see a computer list' do
+      visit computers_path
+      computers.each do |q|
+        expect(page).to have_content q.title
+      end
     end
+
+    scenario 'User tries to see information about computer' do
+      visit computers_path
+      within(".computer_title#{computer.id}") { click_on 'Show' }
+      expect(page).to have_content computer.title
+      expect(page).to have_content computer.specifications
+      expect(page).to have_content computer.cost
+      expect(page).to have_content computer.creation
+    end
+
   end
 
-  scenario 'User tries to see information about computer' do
-    visit computers_path
-    within(".computer_title#{computer.id}") { click_on 'Show' }
-    expect(page).to have_content computer.title
-    expect(page).to have_content computer.specifications
-    expect(page).to have_content computer.cost
-    expect(page).to have_content computer.creation
+  context 'Guest' do
+
+    scenario 'Guest can not see computer list' do
+      visit computers_path
+      computers.each do |q|
+        expect(page).to_not have_content q.title
+      end
+    end
+
+    scenario 'Guest tries to see information about computer' do
+      visit computer_path(computer)
+      expect(page).to_not have_content computer.title
+    end
+
   end
 end

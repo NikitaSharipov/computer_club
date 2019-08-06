@@ -42,15 +42,25 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    reservation.destroy
+    @reservation.destroy
     redirect_back fallback_location: root_path, notice: 'You successfully delete reservation.'
+  end
+
+  def pay
+    cost = @reservation.computer.cost
+    if current_user.credit_withdrawal(cost.to_i)
+      @reservation.update(:payed => true)
+      redirect_back fallback_location: root_path, notice: 'Successful payment'
+    else
+      redirect_back fallback_location: root_path, notice: 'Payment error'
+    end
   end
 
   private
 
-  def reservation
-    @reservation = Reservation.find(params[:id])
-  end
+  #def reservation
+  #  @reservation = Reservation.find(params[:id])
+  #end
 
   def publish_reservation
     return if @reservation.errors.any?

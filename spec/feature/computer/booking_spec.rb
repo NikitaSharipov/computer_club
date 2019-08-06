@@ -6,16 +6,17 @@ feature 'User can book a computer', %q{
   I'd like to be able to book a computer
 } do
 
+  given!(:computer) { create(:computer) }
+
   describe 'User' do
 
     given(:user) { create :user }
     given(:user2) { create :user }
-    given!(:computer) { create(:computer) }
 
     background { sign_in(user) }
 
     describe 'reservations' do
-      given(:date_now) { Time.now }
+      given(:date_now) { Time.zone.now }
 
       background do
         reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: user, computer: computer)
@@ -23,12 +24,19 @@ feature 'User can book a computer', %q{
       end
 
       scenario 'sees current reservations on сertain date' do
-        select((date_now).strftime("%B"), from: '_date_reservations_2i')
-        select("#{date_now.day  }", from: "_date_reservations_3i")
+        date_tomorrow = date_now + 1.day
+        reservation = Reservation.create(start_time: date_tomorrow, end_time: date_tomorrow + 3600, user: user, computer: computer)
+
+        select((date_tomorrow).strftime("%B"), from: '_date_reservations_2i')
+        select("#{date_tomorrow.day  }", from: "_date_reservations_3i")
 
         click_on 'Show'
 
-        expect(page).to have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+        expect(page).to have_content("Reservations start time: #{(date_tomorrow).strftime("%d %B, %H:%M")}")
+      end
+
+      scenario 'sees current reservations on today' do
+        expect(page).to have_content("Reservations start time: #{(date_now).strftime("%d %B, %H:%M")}")
       end
 
       scenario "don't sees reservations on other date" do
@@ -37,7 +45,7 @@ feature 'User can book a computer', %q{
 
         click_on 'Show'
 
-        expect(page).to_not have_content("Reservations start time: #{(date_now - 10800).strftime("%d %B, %H:%M")}")
+        expect(page).to_not have_content("Reservations start time: #{(date_now).strftime("%d %B, %H:%M")}")
       end
     end
 
@@ -61,15 +69,16 @@ feature 'User can book a computer', %q{
     end
 
     scenario 'Computer alredy reserved' do
-      reservation = Reservation.create(start_time: "2019-5-30 15:00:00", end_time: "2019-5-30 16:00:00", user: user, computer: computer)
+      start_time = Time.zone.now
+      reservation = Reservation.create(start_time: start_time , end_time: start_time + 3600, user: user, computer: computer)
 
       visit reservations_path
       select(computer.title, from: 'computer_id')
 
-      select('May', from: '_date_2i')
-      select('30', from: "_date_3i")
+      select("#{start_time.strftime("%B")}", from: '_date_2i')
+      select("#{start_time.strftime("%-d")}", from: "_date_3i")
 
-      fill_in 'start_time', with: "15:00"
+      fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
       fill_in 'duration', with: "1"
 
       click_on 'Make a reservation!'
@@ -117,8 +126,7 @@ feature 'User can book a computer', %q{
   describe 'Admin ' do
 
     given(:admin) { create :user, :admin  }
-    given!(:computer) { create(:computer) }
-    given(:date_now) { Time.now }
+    given(:date_now) { Time.zone.now }
 
     background do
       sign_in(admin)
@@ -146,6 +154,25 @@ feature 'User can book a computer', %q{
 
       expect(page).to have_content('You reserved a computer.')
 
+    end
+
+    scenario 'can not reserve computer for user with time intersection' do
+      start_time = Time.zone.now
+      reservation = Reservation.create(start_time: start_time , end_time: start_time + 3600, user: admin, computer: computer)
+
+      visit reservations_path
+      select(admin.email, from: 'user_id')
+      select(computer.title, from: 'computer_id')
+
+      select("#{start_time.strftime("%B")}", from: '_date_2i')
+      select("#{start_time.strftime("%-d")}", from: "_date_3i")
+
+      fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
+      fill_in 'duration', with: "1"
+
+      click_on 'Make a reservation!'
+
+      expect(Reservation.count).to eq(1)
     end
 
     scenario 'can remove reservation' do
