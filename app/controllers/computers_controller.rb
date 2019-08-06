@@ -44,18 +44,6 @@ class ComputersController < ApplicationController
     end
   end
 
-  def pay
-    reservation_id = params[:reservation]
-    reservation = Reservation.where(id: reservation_id).first
-    cost = reservation.computer.cost
-    if current_user.credit_withdrawal(cost.to_i)
-      reservation.update(:payed => true)
-      redirect_back fallback_location: root_path, notice: 'Successful payment'
-    else
-      redirect_back fallback_location: root_path, notice: 'Payment error'
-    end
-  end
-
   private
 
   def computer_params

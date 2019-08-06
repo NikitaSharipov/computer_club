@@ -14,10 +14,7 @@
                 p Payment made
               -else
                 p You need to pay #{reservation.sum_pay(computer.cost)} credits
-                //=link_to "Pay now!", pay_computer_path(computer)
-                = form_with model: @computer, url: pay_computer_path(computer) , html: { id: "computer-pay" } do |f|
-                  p
-                    = f.hidden_field :reservation, value: reservation.id
+                = form_with url: pay_reservation_path(reservation) , html: { id: "reservation-pay" } do |f|
                   p= f.submit 'Pay now!'
 
 

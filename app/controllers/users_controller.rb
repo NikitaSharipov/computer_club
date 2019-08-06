@@ -19,8 +19,8 @@ class UsersController < ApplicationController
   end
 
   def reservations
-    authorize! :reservations, User
     @user = User.find(params[:id])
+    authorize! :reservations, @user
   end
 
 end

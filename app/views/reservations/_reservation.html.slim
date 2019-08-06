@@ -10,7 +10,5 @@
         p Payment made
       -else
         p User need to pay #{reservation.sum_pay(reservation.computer.cost)} credits
-        = form_with url: pay_computer_path(reservation.computer) , html: { id: "computer-pay" } do |f|
-          p
-            = f.hidden_field :reservation, value: reservation.id
+        = form_with url: pay_reservation_path(reservation) , html: { id: "computer-pay" } do |f|
           p= f.submit 'Close debt'
