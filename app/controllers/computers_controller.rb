@@ -37,8 +37,4 @@ class ComputersController < ApplicationController
   def computer_params
     params.permit(:title, :specifications, :cost, :creation, :last_service, :service_frequency)
   end
-
-  def reservation_params
-    params.permit(:computer_id, :start_time, :duration, "date(2i)", "date(3i)")
-  end
 end

@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   def replenish(credits_income)
     self.credits += credits_income
+    self.save
   end
 
   def payment_possibility?(cost)

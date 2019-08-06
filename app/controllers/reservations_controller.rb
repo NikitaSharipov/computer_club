@@ -20,12 +20,7 @@ class ReservationsController < ApplicationController
 
     @reservation = Reservation.new
     @reservation.computer_id = params[:computer_id]
-    @reservation.user =
-      if params["user_id"]
-        User.where(id: params["user_id"]).first
-      else
-        current_user
-      end
+    @reservation.user = income_user
 
     start_time = params[:start_time].to_datetime.change(month: params["date(2i)"].to_i, day: params["date(3i)"].to_i)
 
@@ -33,8 +28,7 @@ class ReservationsController < ApplicationController
 
     @reservation.end_time_calculation(params[:duration].to_i)
 
-    if @reservation.valid?
-      @reservation.save!
+    if @reservation.save
       redirect_to reservations_path, notice: 'You reserved a computer.'
     else
       redirect_to reservations_path, notice: "#{@reservation.errors.full_messages}"

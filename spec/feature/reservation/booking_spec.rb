@@ -114,7 +114,6 @@ feature 'User can book a computer', %q{
         end
 
         Capybara.using_session('guest') do
-          save_and_open_page
           expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
         end
       end
