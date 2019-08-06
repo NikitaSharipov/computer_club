@@ -38,8 +38,8 @@ describe Ability do
 
     it { should be_able_to :replenish, :account }
 
-    it { should be_able_to :reservations, user, id: user.id }
-    #it { should_not be_able_to :reservations, user, id: other.id }
+    it { should be_able_to :reservations, user}
+    it { should_not be_able_to :reservations, other}
 
   end
 
