@@ -18,7 +18,6 @@ class ComputersController < ApplicationController
     if @computer.save
       redirect_to computers_path, notice: 'You have added a computer'
     else
-      @computer.valid?
       redirect_to computers_path, notice: "#{@computer.errors.full_messages}"
     end
   end
@@ -30,18 +29,7 @@ class ComputersController < ApplicationController
   end
 
   def computer
-    @computer = Computer.find(params[:id])
-  end
-
-  def payment
-    @involved_reservations = Reservation.where(user: current_user)
-
-    @involved_computers = []
-    @involved_reservations.each do |reservation|
-      unless @involved_computers.include?(reservation.computer)
-        @involved_computers << reservation.computer
-      end
-    end
+    @computer ||= Computer.find(params[:id])
   end
 
   private

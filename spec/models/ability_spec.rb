@@ -21,8 +21,8 @@ describe Ability do
     it { should_not be_able_to :manage, :all }
 
     it { should be_able_to :read, Computer }
-    it { should be_able_to :payment, Computer }
 
+    it { should be_able_to :payment, Reservation }
     it { should be_able_to :index, Reservation }
     it { should be_able_to :date, Reservation }
 

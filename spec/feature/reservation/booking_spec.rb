@@ -63,8 +63,6 @@ feature 'User can book a computer', %q{
 
       click_on 'Make a reservation!'
 
-      expect(Reservation.count).to eq(1)
-
       expect(page).to have_content('You reserved a computer.')
     end
 
@@ -83,7 +81,7 @@ feature 'User can book a computer', %q{
 
       click_on 'Make a reservation!'
 
-      expect(Reservation.count).to eq(1)
+      expect(page).to have_content('reservation time intersection')
     end
 
     context "multiply questions", js: true do
@@ -116,6 +114,7 @@ feature 'User can book a computer', %q{
         end
 
         Capybara.using_session('guest') do
+          save_and_open_page
           expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
         end
       end
@@ -150,8 +149,6 @@ feature 'User can book a computer', %q{
 
       click_on 'Make a reservation!'
 
-      expect(Reservation.count).to eq(1)
-
       expect(page).to have_content('You reserved a computer.')
 
     end
@@ -172,14 +169,14 @@ feature 'User can book a computer', %q{
 
       click_on 'Make a reservation!'
 
-      expect(Reservation.count).to eq(1)
+      expect(page).to have_content('reservation time intersection')
     end
 
     scenario 'can remove reservation' do
       reservation = Reservation.create(start_time: date_now, end_time: date_now + 3600, user: admin, computer: computer)
       click_on "Reservations"
       click_on "Delete"
-      expect(Reservation.count).to eq(0)
+      expect(page).to have_content('You successfully delete reservation.')
     end
 
     scenario 'can close debt' do

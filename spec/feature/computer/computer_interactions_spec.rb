@@ -22,12 +22,14 @@ feature 'Alministrator can add or delete computers', %q{
     fill_in 'service_frequency', with: 2
     click_on 'Add'
     expect(page).to have_content('You have added a computer')
+    expect(page).to have_content('Test_title')
   end
 
   scenario 'Administrator can delete computer' do
     visit computers_path
     click_on 'Delete'
     expect(page).to have_content('You successfully delete computer.')
+    expect(page).to_not have_content(computer.title)
   end
 
 end
