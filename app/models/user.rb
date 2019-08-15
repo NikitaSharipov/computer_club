@@ -25,4 +25,19 @@ class User < ApplicationRecord
     true
   end
 
+  def credit_withdrawal(reservation)
+    transaction do
+      cost = reservation.computer.cost.to_i
+      return false unless payment_possibility?(cost)
+      self.credits -= cost
+      self.save!
+      reservation.update(:payed => true)
+      true
+    end
+  end
+
+  def reserved_computers
+    Computer.where(id: self.reservation.select(:computer_id).map(&:computer_id).uniq).to_a
+  end
+
 end
