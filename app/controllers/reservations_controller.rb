@@ -41,16 +41,11 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-    @involved_reservations = Reservation.where(user: current_user)
-
-    @involved_computers =
-      @involved_reservations.map { |reservation| reservation.computer }.uniq
+    @involved_computers = current_user.reserved_computers
   end
 
   def pay
-    cost = @reservation.computer.cost
-    if current_user.credit_withdrawal(cost.to_i)
-      @reservation.update(:payed => true)
+    if current_user.credit_withdrawal(@reservation)
       redirect_back fallback_location: root_path, notice: 'Successful payment'
     else
       redirect_back fallback_location: root_path, notice: 'Payment error'
