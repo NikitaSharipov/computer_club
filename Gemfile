@@ -35,6 +35,7 @@ gem 'jquery-rails'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+gem 'cancancan'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -67,11 +68,8 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'simplecov', require: false
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'launchy'

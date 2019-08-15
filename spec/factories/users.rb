@@ -8,9 +8,14 @@ FactoryBot.define do
     credits { 100 }
     password { '12345678' }
     password_confirmation { '12345678' }
+    admin { false }
   end
 
   trait :low_credits do
     credits { 1 }
+  end
+
+  trait :admin do
+    admin { true }
   end
 end

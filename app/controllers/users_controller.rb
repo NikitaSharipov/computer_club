@@ -1,13 +1,20 @@
 class UsersController < ApplicationController
 
   def account_replenish
-
+    authorize! :replenish, :account
   end
 
   def replenish
-    current_user.replenish(params["credits"].to_i)
-    current_user.save
-    redirect_to account_replenish_users_path, notice: 'You replenish your account.'
+    authorize! :replenish, :account
+    user = income_user
+
+    user.replenish(params["credits"].to_i)
+    redirect_back fallback_location: root_path, notice: 'Account replenished.'
+  end
+
+  def reservations
+    @user = User.find(params[:id])
+    authorize! :reservations, @user
   end
 
 end

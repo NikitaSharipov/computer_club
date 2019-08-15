@@ -7,7 +7,7 @@ class Reservation < ApplicationRecord
 
   validate :validate_sequence, :validate_intersection, :on => :create
 
-  # scope :by_date, -> (date_input) { where(start_time: date_input)}
+  #scope :actual, -> { where(start_time > Time.now)}
 
   def end_time_calculation(duration)
     self.end_time = start_time + 1.hour * duration

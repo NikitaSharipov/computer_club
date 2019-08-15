@@ -1,4 +1,7 @@
 class SoftwareRequestsController < ApplicationController
+
+  authorize_resource
+
   def create
     @software_request = SoftwareRequest.new(software_request_params)
     @software_request.user = current_user

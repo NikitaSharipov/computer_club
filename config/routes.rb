@@ -8,18 +8,24 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :computers, only: [:index, :show], shallow: true do
-    get :reservation, on: :collection
-    post :reservation, on: :collection
-    post :reserve, on: :member
+  resources :computers, only: [:index, :show, :create, :destroy], shallow: true do
     resources :software_requests, only: [:create]
-    get :payment, on: :collection
-    post :pay, on: :member
   end
 
   resources :users do
     get :account_replenish, on: :collection
     post :replenish, on: :member
+    get :reservations, on: :member
+  end
+
+  resource :admin_panel, only: [:show] do
+    get :reservation, on: :collection
+  end
+
+  resources :reservations, only: [:index, :destroy, :create] do
+    post :date, on: :collection
+    post :pay, on: :member
+    get :payment, on: :collection
   end
 
   root to: "computers#index"
