@@ -3,10 +3,17 @@ require 'rails_helper'
 describe Ability do
   subject(:ability) { Ability.new(user) }
 
+  describe 'for owner' do
+    let(:user) { create :user, :owner }
+
+    it { should be_able_to :manage, :all }
+  end
+
   describe 'for admin' do
     let(:user) { create :user, :admin }
 
     it { should be_able_to :manage, :all }
+    it { should_not be_able_to :show, :owner_panel }
   end
 
   describe 'for user' do
