@@ -7,15 +7,25 @@ class Ability
 
   def initialize(user)
     @user = user
-
     if user
-      user.admin? ? admin_abilities : user_abilities
+      if user.owner?
+        owner_abilities
+      elsif user.admin?
+        admin_abilities
+      else
+        user_abilities
+      end
     else
       guest_abilities
     end
   end
 
   def admin_abilities
+    can :manage, :all
+    cannot :show, :owner_panel
+  end
+
+  def owner_abilities
     can :manage, :all
   end
 

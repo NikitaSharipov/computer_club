@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get :reservation, on: :collection
   end
 
+  resource :owner_panel, only: [:show]
+
   resources :reservations, only: [:index, :destroy, :create] do
     post :date, on: :collection
     post :pay, on: :member
