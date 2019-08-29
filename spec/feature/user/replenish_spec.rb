@@ -47,7 +47,6 @@ feature 'User can replenish account', %q{
     scenario "can replenish user's account" do
       visit admin_panel_path
       click_on "Replenish user's account"
-      save_and_open_page
       select(owner.email, from: 'user_id')
       fill_in 'How many credits do you want to fund?', with: "100"
       click_on 'Replenish!'
