@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     get :payment, on: :collection
   end
 
+  resources :reports, only: [:show, :create] do
+    get :option, on: :collection
+  end
+
   root to: "computers#index"
 
   mount ActionCable.server => '/cable'
