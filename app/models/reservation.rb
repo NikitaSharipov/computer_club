@@ -11,23 +11,24 @@ class Reservation < ApplicationRecord
 
   #scope :actual, -> { where(start_time > Time.now)}
 
+  scope :by_date, -> (start_date, end_date) { Reservation.where(start_time: start_date..end_date, end_time: start_date..end_date ) }
+
   def end_time_calculation(duration)
     self.end_time = start_time + 1.hour * duration
   end
 
   def show?(date)
-    # date == start_time.strftime("%-m %d")
-    date = Reservation.date_prepare(date)
     date.to_date >= start_time.to_date && date.to_date <= end_time.to_date
   end
 
   def show_further?
-    date = Reservation.date_prepare(Time.now.strftime("%-m %d"))
+    date = add_zero_to_one_digit_month(Time.now.strftime("%-m %d"))
     date.to_date <= start_time.to_date
   end
 
-  def self.date_prepare(date)
-    date.split(' ').last.length == 1 ? date.insert(-2, '0') : date
+  def self.date_prepare (year, month, day)
+    date = year + '-' + month + '-' + day
+    date.split('-').last.length == 1 ? date.insert(-2, '0') : date
   end
 
   def duration_hours
@@ -36,6 +37,10 @@ class Reservation < ApplicationRecord
 
   def sum_pay(cost)
     cost * duration_hours
+  end
+
+  def add_zero_to_one_digit_month(date)
+    date.split('-').last.length == 1 ? date.insert(-2, '0') : date
   end
 
   private

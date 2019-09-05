@@ -1,1 +1,8 @@
-p 1
+h1= @report.title
+p Report start date: #{@report.start_date}
+p Report end date: #{@report.end_date}
+p Total for the given parameters there are #{@report.reservation_count} reservations
+-if @report.proceeds
+  p Proceeds: #{@report.proceeds} credits
+  p Rent length: #{@report.rent_length}
+  p Idle length #{@report.idle_length}

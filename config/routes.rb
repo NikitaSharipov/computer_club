@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     get :payment, on: :collection
   end
 
-  resources :reports, only: [:show, :create] do
+  resources :reports, only: [:show, :create, :index] do
     get :option, on: :collection
   end
 

@@ -2,11 +2,11 @@
   = form_with url: date_reservations_path, local: true, html: { id: "choose_date" } do |f|
     p
       = f.label :date_reservations, 'Enter date:'
-      = f.date_select :date_reservations, discard_year: true
+      = f.date_select :date_reservations
 
     p= f.submit 'Show'
 
-  p Show reservations for #{Reservation.date_prepare(@date).to_date}
+  p Show reservations for #{@date.to_date}
 
 .computers
   -@computers.each do |computer|

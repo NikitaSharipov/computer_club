@@ -7,7 +7,7 @@ class AdminPanelsController < ApplicationController
   def reservation
     authorize! :reservation, :admin_panel
     if params["date_reservations(2i)"]
-      @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
+      @date = Reservation.date_prepare(params["date_reservations(1i)"], params["date_reservations(2i)"], params["date_reservations(3i)"])
     else
       @date = Time.now.strftime("%-m %d")
     end
