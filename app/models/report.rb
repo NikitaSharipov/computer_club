@@ -1,12 +1,14 @@
 class Report < ApplicationRecord
   belongs_to :user
-  has_many :reports_reservation, dependent: :destroy
+  #has_many :reports_reservation, dependent: :destroy
 
   after_create :set_fields
 
-  validates :title, :start_date, :end_date, presence: true
+  validates :title, :start_date, :end_date, :kind, presence: true
 
   validate :validate_sequence, :on => :create
+
+  TYPES = %w[reservation computers]
 
   def reservation_count
     reservations = Reservation.by_date(start_date, end_date).count
@@ -27,6 +29,8 @@ class Report < ApplicationRecord
   private
 
   def set_fields
+    return if self.kind == 'computers'
+
     reservations = Reservation.by_date(start_date, end_date)
     return if reservations.count == 0
     # set proceeds and rent length
@@ -43,7 +47,6 @@ class Report < ApplicationRecord
     # switch from rational to integer and then from days to hours
     sum_hours = (end_date - start_date).to_i * 24
     self.idle_length = sum_hours - rent_length
-
     self.save!
   end
 

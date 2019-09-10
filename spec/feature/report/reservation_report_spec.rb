@@ -15,6 +15,8 @@ feature 'Owner can watch reservation report', %q{
   scenario "can create reservation report" do
     visit owner_panel_path
     click_on 'Create report'
+
+    select("reservation", from: "kind")
     fill_in 'Your report title', with: 'Title1'
 
     select("#{date_today.year}", from: "_start_date_1i")
@@ -33,6 +35,8 @@ feature 'Owner can watch reservation report', %q{
   scenario "can not create reservation report with wrong date" do
     visit owner_panel_path
     click_on 'Create report'
+
+    select("reservation", from: "kind")
     fill_in 'Your report title', with: 'Title1'
 
     select("#{date_today.year}", from: "_end_date_1i")

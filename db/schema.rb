@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_29_150433) do
+ActiveRecord::Schema.define(version: 2019_08_29_141704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,8 @@ ActiveRecord::Schema.define(version: 2019_08_29_150433) do
     t.integer "rent_length"
     t.integer "idle_length"
     t.bigint "user_id"
+    t.string "kind", null: false
     t.index ["user_id"], name: "index_reports_on_user_id"
-  end
-
-  create_table "reports_reservations", force: :cascade do |t|
-    t.bigint "reservation_id"
-    t.bigint "report_id"
-    t.index ["report_id"], name: "index_reports_reservations_on_report_id"
-    t.index ["reservation_id"], name: "index_reports_reservations_on_reservation_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -80,8 +74,6 @@ ActiveRecord::Schema.define(version: 2019_08_29_150433) do
   end
 
   add_foreign_key "reports", "users"
-  add_foreign_key "reports_reservations", "reports"
-  add_foreign_key "reports_reservations", "reservations"
   add_foreign_key "reservations", "computers"
   add_foreign_key "reservations", "users"
   add_foreign_key "software_requests", "computers"

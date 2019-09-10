@@ -8,6 +8,7 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.integer :rent_length
       t.integer :idle_length
       t.references :user, foreign_key: true
+      t.string :kind, null: false
     end
   end
 end

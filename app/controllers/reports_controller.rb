@@ -18,6 +18,7 @@ class ReportsController < ApplicationController
     @report.title = params[:title] == '' ? Date.today.to_s : params[:title]
     @report.start_date = Date.new(params["start_date(1i)"].to_i, params["start_date(2i)"].to_i, params["start_date(3i)"].to_i)
     @report.end_date = Date.new(params["end_date(1i)"].to_i, params["end_date(2i)"].to_i, params["end_date(3i)"].to_i)
+    @report.kind = params[:kind]
 
     if @report.save
       redirect_to report_path(@report), notice: 'You created a report'

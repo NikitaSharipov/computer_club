@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :computer
 
-  has_many :reports_reservation, dependent: :destroy
+  #has_many :reports_reservation, dependent: :destroy
 
   validates :start_time, :end_time, presence: true
   validates_inclusion_of :payed, in: [true, false]
