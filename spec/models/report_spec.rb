@@ -15,13 +15,6 @@ RSpec.describe Report, type: :model do
 
     before { @report = Report.create(title: 'test', start_date: Date.yesterday, end_date: Date.tomorrow, user: user) }
 
-    # it "should call set_field after creation" do
-    #   report = Report.create(title: 'test', start_date: Date.yesterday, end_date: Date.tomorrow, user: user)
-    #   expect(report.proceeds).to be
-    #   expect(report.rent_length).to be
-    #   expect(report.idle_length).to be
-    # end
-
     it "should set sum proceeds to report.proceeds" do
       expect(@report.proceeds).to eq(reservation1.sum_pay(computer.cost) + reservation2.sum_pay(computer.cost))
     end
@@ -35,6 +28,11 @@ RSpec.describe Report, type: :model do
       rent_length = reservation1.duration_hours + reservation2.duration_hours
 
       expect(@report.idle_length).to eq(sum_hours - rent_length)
+    end
+
+    it "should create hash of computers with sum reservations duration in value" do
+      expect(@report.computers.first.first).to eq(computer)
+      expect(@report.computers.first.last).to eq(reservation1.duration_hours + reservation2.duration_hours )
     end
   end
 end

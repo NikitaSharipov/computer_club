@@ -50,9 +50,10 @@ feature 'Owner can watch reservation report', %q{
 
   describe "report" do
 
-    given(:computer) { create(:computer) }
-    given!(:reservation1) { create(:reservation, computer: computer, user: owner, payed: true) }
-    given!(:reservation2) { create(:reservation, :other_reservation, computer: computer, user: owner, payed: true) }
+    given(:computer1) { create(:computer) }
+    given(:computer2) { create(:computer) }
+    given!(:reservation1) { create(:reservation, computer: computer1, user: owner, payed: true) }
+    given!(:reservation2) { create(:reservation, :other_reservation, computer: computer2, user: owner, payed: true) }
     given!(:report) {create(:report, title: 'test', start_date: Date.yesterday, end_date: Date.tomorrow, user: owner) }
 
     scenario "can watch all reports" do
@@ -72,6 +73,7 @@ feature 'Owner can watch reservation report', %q{
       expect(page).to have_content("#{report.proceeds}")
       expect(page).to have_content("#{report.rent_length}")
       expect(page).to have_content("#{report.idle_length}")
+      expect(page).to have_content("Rent length for #{report.computers.first.first.title} is #{report.computers.first.last} hour(s)")
     end
   end
 

@@ -6,3 +6,5 @@ p Total for the given parameters there are #{@report.reservation_count} reservat
   p Proceeds: #{@report.proceeds} credits
   p Rent length: #{@report.rent_length}
   p Idle length #{@report.idle_length}
+  - @report.computers.each do |computer, hours|
+    p Rent length for #{computer.title} is #{hours} hour(s)

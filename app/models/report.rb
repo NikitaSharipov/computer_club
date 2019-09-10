@@ -12,6 +12,18 @@ class Report < ApplicationRecord
     reservations = Reservation.by_date(start_date, end_date).count
   end
 
+  def computers
+    reservations = Reservation.by_date(start_date, end_date)
+    computers_involvement = Hash.new
+    reservations.each do |reservation|
+      if reservation.payed?
+        computers_involvement[reservation.computer] ||= 0
+        computers_involvement[reservation.computer] += reservation.duration_hours
+      end
+    end
+    computers_involvement
+  end
+
   private
 
   def set_fields
