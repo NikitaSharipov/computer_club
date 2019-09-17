@@ -8,7 +8,7 @@ class Report < ApplicationRecord
 
   validate :validate_sequence, :on => :create
 
-  TYPES = %w[reservation computers]
+  TYPES = %w[reservation computers users]
 
   def reservation_count
     reservations = Reservation.by_date(start_date, end_date).count
@@ -24,6 +24,22 @@ class Report < ApplicationRecord
       end
     end
     computers_involvement
+  end
+
+  def service_needed
+    computers = Computer.all.to_a
+
+    computers.each do |computer|
+      computer.service_flag_temporary(start_date)
+      computers = computers - [computer] if computer.service_needed == true
+      computer.service_flag_temporary(end_date)
+      computers = computers - [computer] if computer.service_needed == false
+    end
+    computers
+  end
+
+  def users_in_date_range
+    User.in_date_range(start_date, end_date).to_a
   end
 
   private

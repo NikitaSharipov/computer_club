@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, lambda { |u| u.admin? || u.owner? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 

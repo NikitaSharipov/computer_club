@@ -5,13 +5,3 @@ class Services::ServiceRemind
     ServiceReminderMailer.remind(computers_titles).deliver_later
   end
 end
-
-
-
-
-#  created-at 9 month ago
-#  last_service nill
-#  service_frequency 9 month
-
-#  1 last_service + service_frequency > now
-#  2 last_service - nill< creation + service_frequency > now

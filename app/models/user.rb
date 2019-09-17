@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   validates :credits, presence: true
 
+  #scope :in_date, :conditions => { :created_at > Date.today }
+  scope :in_date_range, -> (start_date, end_date) { where(created_at: start_date..end_date) }
+
   def replenish(credits_income)
     self.credits += credits_income
     self.save
