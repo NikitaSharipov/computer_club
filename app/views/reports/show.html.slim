@@ -21,5 +21,6 @@ p Report end date: #{@report.end_date}
     p Users registered only in this date range is
     -@report.users_in_date_range.each do |user|
       p #{user.email}
+      p user's credits: #{user.credits}
   -else
     p There are no users registered at given time interval

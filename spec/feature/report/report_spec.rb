@@ -114,6 +114,7 @@ feature 'Owner can watch computers report', %q{
     end
 
     expect(page).to have_content("#{owner.email}")
+    expect(page).to have_content("user's credits: #{owner.credits}")
     expect(page).to_not have_content("#{old_user.email}")
     end
   end
