@@ -43,7 +43,10 @@ describe Ability do
 
     it { should be_able_to :create, SoftwareRequest }
 
-    it { should be_able_to :replenish, :account }
+    it { should be_able_to :account_replenish, :user }
+
+    it { should be_able_to :reservations, user}
+    it { should_not be_able_to :reservations, other}
 
     it { should be_able_to :reservations, user}
     it { should_not be_able_to :reservations, other}

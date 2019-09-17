@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
   end
 
   def date
-    @date = params["date_reservations(2i)"] + ' ' + params["date_reservations(3i)"]
+    @date = Reservation.date_prepare(params["date_reservations(1i)"], params["date_reservations(2i)"], params["date_reservations(3i)"])
     @computers = Computer.all
 
     render :index

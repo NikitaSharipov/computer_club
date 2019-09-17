@@ -38,7 +38,8 @@ class Ability
 
     can [:create], SoftwareRequest
 
-    can :replenish, :account
+    can :account_replenish, :user
+    can :replenish, User, id: user.id
     can :reservations, User, id: user.id
     can :destroy, Reservation, user_id: user.id
   end

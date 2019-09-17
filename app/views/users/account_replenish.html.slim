@@ -1,6 +1,6 @@
 .replenish_form
   = form_with url: replenish_user_path(current_user), html: { id: "replenish-user" } do |f|
-    -if current_user.admin?
+    -if current_user.admin? || current_user.owner?
       p
         = f.label :user, 'Choose user'
         = f.collection_select :user_id, User.all, :id, :email

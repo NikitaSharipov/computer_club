@@ -9,7 +9,6 @@ feature 'User can pay for a computer', %q{
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
   given!(:reservation) { create(:reservation, computer: computer, user: user) }
-  given!(:reservation) { create(:reservation, computer: computer, user: user) }
 
   background { sign_in(user) }
 

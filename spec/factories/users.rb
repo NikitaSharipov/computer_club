@@ -22,4 +22,8 @@ FactoryBot.define do
   trait :owner do
     owner { true }
   end
+
+  trait :old_user do
+    created_at { Date.today - 1.year }
+  end
 end

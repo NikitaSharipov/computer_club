@@ -17,4 +17,8 @@ every 1.month do
   runner "ServiceRemindJob.perform_later"
 end
 
+every 1.week do
+  runner "ServiceFlagJob.perform_later"
+end
+
 # Learn more: http://github.com/javan/whenever
