@@ -26,4 +26,16 @@ feature 'User can pay for a computer', %q{
     expect(page).to have_content("Payment error")
   end
 
+  scenario 'If user delete payed reservation, money returns' do
+    credits = user.credits
+
+    visit payment_reservations_path
+    click_on "Pay now!"
+
+    visit reservations_user_path(user)
+    click_on 'Delete'
+    expect(page).to have_content('You successfully delete reservation.')
+    expect(page).to have_content("Your credits: #{credits}")
+  end
+
 end
