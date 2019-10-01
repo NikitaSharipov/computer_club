@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @date = Time.now.strftime("%-m %d")
+    @date = Time.now.strftime("%d-%m-%Y")
     @computers = Computer.all
   end
 

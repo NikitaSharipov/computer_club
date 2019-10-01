@@ -10,8 +10,12 @@ class Report < ApplicationRecord
 
   TYPES = %w[reservation computers users]
 
-  def reservation_count
-    reservations = Reservation.by_date(start_date, end_date).count
+  def unpayed_reservation_count
+    Reservation.by_date(start_date, end_date).where(payed: false).count
+  end
+
+  def payed_reservation_count
+    Reservation.by_date(start_date, end_date).where(payed: true).count
   end
 
   def computers

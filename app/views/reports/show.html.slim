@@ -2,8 +2,9 @@ h1= @report.title
 p Report start date: #{@report.start_date}
 p Report end date: #{@report.end_date}
 -if @report.kind == 'reservation'
-  p Total for the given parameters there are #{@report.reservation_count} reservations
+  p Total for the given parameters there are #{@report.payed_reservation_count} payed and #{@report.unpayed_reservation_count} unpayed reservations
   -if @report.proceeds
+    p For payed reservations:
     p Proceeds: #{@report.proceeds} credits
     p Rent length: #{@report.rent_length}
     p Idle length #{@report.idle_length}
@@ -17,8 +18,8 @@ p Report end date: #{@report.end_date}
   -else
     p There are no computers needing maintenance at a given time interval
 -elsif @report.kind == 'users'
-  -if @report.users_in_date_range != 0
-    p Users registered only in this date range is
+  -if @report.users_in_date_range.count != 0
+    p Total there are #{@report.users_in_date_range.count} user(s) registered only in this date range
     -@report.users_in_date_range.each do |user|
       p #{user.email}
       p user's credits: #{user.credits}

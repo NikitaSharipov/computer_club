@@ -34,6 +34,14 @@ feature 'Owner can watch computers report', %q{
     expect(page).to have_content('You created a report')
   end
 
+  scenario "can delete report" do
+    visit owner_panel_path
+    click_on 'Watch existing reports'
+    click_on 'Delete'
+
+    expect(page).to have_content('You successfully delete report.')
+  end
+
   scenario "can not create any report with wrong date" do
     visit owner_panel_path
     click_on 'Create report'
