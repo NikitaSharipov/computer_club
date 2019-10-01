@@ -1,6 +1,12 @@
 - @user.reservation.each do |reservation|
   div id= "reservation #{reservation.id}"
     -if reservation.show_further?
+      p Computer title: #{reservation.computer.title}
       p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
       p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+      p Total payment amount: #{reservation.sum_pay(reservation.computer.cost)}
+      - if reservation.payed?
+        p You have already paid for this reservation
+      - else
+        p You need to pay for this reservation
       =link_to "Delete", reservation, method: :delete, class: 'btn btn-link'

@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
@@ -9,7 +7,6 @@ class User < ApplicationRecord
 
   validates :credits, presence: true
 
-  #scope :in_date, :conditions => { :created_at > Date.today }
   scope :in_date_range, -> (start_date, end_date) { where(created_at: start_date..end_date) }
 
   def replenish(credits_income)
@@ -17,22 +14,11 @@ class User < ApplicationRecord
     self.save
   end
 
-  def payment_possibility?(cost)
-    cost <= credits
-  end
-
-  def credit_withdrawal(cost)
-    return false unless payment_possibility?(cost)
-    self.credits -= cost
-    self.save!
-    true
-  end
-
   def credit_withdrawal(reservation)
     transaction do
-      cost = reservation.computer.cost.to_i
-      return false unless payment_possibility?(cost)
-      self.credits -= cost
+      sum_pay = reservation.sum_pay(reservation.computer.cost)
+      return false unless payment_possibility?(sum_pay)
+      self.credits -= sum_pay
       self.save!
       reservation.update(:payed => true)
       true
@@ -41,6 +27,12 @@ class User < ApplicationRecord
 
   def reserved_computers
     Computer.where(id: self.reservation.select(:computer_id).map(&:computer_id).uniq).to_a
+  end
+
+  private
+
+  def payment_possibility?(sum_pay)
+    sum_pay <= credits
   end
 
 end

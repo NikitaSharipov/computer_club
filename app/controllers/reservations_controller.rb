@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @date = Time.now.strftime("%-m %d")
+    @date = Time.now.strftime("%d-%m-%Y")
     @computers = Computer.all
   end
 
@@ -36,6 +36,8 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    @reservation.user.credits += @reservation.sum_pay(@reservation.computer.cost) if @reservation.payed?
+    @reservation.user.save!
     @reservation.destroy
     redirect_back fallback_location: root_path, notice: 'You successfully delete reservation.'
   end

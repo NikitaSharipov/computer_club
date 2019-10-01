@@ -22,7 +22,7 @@ class Reservation < ApplicationRecord
   end
 
   def show_further?
-    date = add_zero_to_one_digit_month(Time.now.strftime("%-m %d"))
+    date = Time.now.strftime("%d-%m-%Y")
     date.to_date <= start_time.to_date
   end
 
@@ -37,10 +37,6 @@ class Reservation < ApplicationRecord
 
   def sum_pay(cost)
     cost * duration_hours
-  end
-
-  def add_zero_to_one_digit_month(date)
-    date.split('-').last.length == 1 ? date.insert(-2, '0') : date
   end
 
   private

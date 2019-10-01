@@ -2,3 +2,4 @@ div class="report_title#{report.id}"
   = report.title
   p report type: #{report.kind}
   =link_to 'Show', report, class: 'btn btn-link'
+  =link_to 'Delete', report, method: :delete, class: 'btn btn-link'
