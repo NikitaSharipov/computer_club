@@ -41,7 +41,7 @@ feature 'User can book a computer', %q{
 
       scenario "don't sees reservations on other date" do
         select((date_now).strftime("%B"), from: '_date_reservations_2i')
-        select('11', from: "_date_reservations_3i")
+        select((date_now + 1.day).day, from: "_date_reservations_3i")
 
         click_on 'Show'
 
@@ -83,8 +83,8 @@ feature 'User can book a computer', %q{
 
       expect(page).to have_content('reservation time intersection')
     end
-    # Странный тест который работает если этот файл в папке computers
-    # Не работает если headless
+
+
     # context "multiply reservations", js: true do
     #   scenario "reservation appears on another user's page" do
     #     Capybara.using_session('user') do

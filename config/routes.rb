@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, lambda { |u| u.admin? || u.owner? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -22,10 +22,16 @@ Rails.application.routes.draw do
     get :reservation, on: :collection
   end
 
+  resource :owner_panel, only: [:show]
+
   resources :reservations, only: [:index, :destroy, :create] do
     post :date, on: :collection
     post :pay, on: :member
     get :payment, on: :collection
+  end
+
+  resources :reports, only: [:show, :create, :index, :destroy] do
+    get :option, on: :collection
   end
 
   root to: "computers#index"

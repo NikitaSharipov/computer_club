@@ -1,0 +1,14 @@
+= form_with url: reports_path, html: { id: "report" } do |f|
+  p
+    = f.label :title, 'Your report title'
+    = f.text_field :title
+  p
+    = f.label :start_date, 'Chose start date'
+    = f.date_select :start_date
+  p
+    = f.label :end_date, 'Chose end date'
+    = f.date_select :end_date
+  p
+    = f.label :type, 'Chose report type'
+    = f.select :kind, Report::TYPES
+  p= f.submit 'Create report'

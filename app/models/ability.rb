@@ -7,9 +7,14 @@ class Ability
 
   def initialize(user)
     @user = user
-
     if user
-      user.admin? ? admin_abilities : user_abilities
+      if user.owner?
+        owner_abilities
+      elsif user.admin?
+        admin_abilities
+      else
+        user_abilities
+      end
     else
       guest_abilities
     end
@@ -17,10 +22,14 @@ class Ability
 
   def admin_abilities
     can :manage, :all
+    cannot :show, :owner_panel
+  end
+
+  def owner_abilities
+    can :manage, :all
   end
 
   def user_abilities
-    #guest_abilities
     can [:read], Computer
 
     can [:index, :date, :payment], Reservation
@@ -28,13 +37,9 @@ class Ability
 
     can [:create], SoftwareRequest
 
-    can :replenish, :account
+    can :account_replenish, :user
+    can :replenish, User, id: user.id
     can :reservations, User, id: user.id
     can :destroy, Reservation, user_id: user.id
   end
-
-  def guest_abilities
-  end
-
-
 end

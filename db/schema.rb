@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_02_132256) do
+ActiveRecord::Schema.define(version: 2019_08_29_141704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 2019_07_02_132256) do
     t.datetime "last_service"
     t.integer "service_frequency", default: 9
     t.boolean "service_needed", default: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "title", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "proceeds"
+    t.integer "rent_length"
+    t.integer "idle_length"
+    t.bigint "user_id"
+    t.string "kind", null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -56,10 +68,12 @@ ActiveRecord::Schema.define(version: 2019_07_02_132256) do
     t.datetime "updated_at", null: false
     t.integer "credits", default: 0
     t.boolean "admin"
+    t.boolean "owner", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reports", "users"
   add_foreign_key "reservations", "computers"
   add_foreign_key "reservations", "users"
   add_foreign_key "software_requests", "computers"
