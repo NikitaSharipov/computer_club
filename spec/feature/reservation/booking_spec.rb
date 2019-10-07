@@ -83,8 +83,8 @@ feature 'User can book a computer', %q{
 
       expect(page).to have_content('reservation time intersection')
     end
-    # Странный тест который работает если этот файл в папке computers
-    # Не работает если headless
+
+
     # context "multiply reservations", js: true do
     #   scenario "reservation appears on another user's page" do
     #     Capybara.using_session('user') do
