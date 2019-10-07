@@ -85,40 +85,40 @@ feature 'User can book a computer', %q{
     end
     # Странный тест который работает если этот файл в папке computers
     # Не работает если headless
-    # context "multiply reservations", js: true do
-    #   scenario "reservation appears on another user's page" do
-    #     Capybara.using_session('user') do
-    #       sign_in(user)
-    #       visit reservations_path
-    #     end
+    context "multiply reservations", js: true do
+      scenario "reservation appears on another user's page" do
+        Capybara.using_session('user') do
+          sign_in(user)
+          visit reservations_path
+        end
 
-    #     Capybara.using_session('guest') do
-    #       sign_in(user2)
-    #       visit reservations_path
-    #     end
+        Capybara.using_session('guest') do
+          sign_in(user2)
+          visit reservations_path
+        end
 
-    #     Capybara.using_session('user') do
-    #       select(computer.title, from: 'computer_id')
+        Capybara.using_session('user') do
+          select(computer.title, from: 'computer_id')
 
-    #       select("#{Date.today.strftime("%B")}", from: '_date_2i')
-    #       select("#{Date.today.strftime("%-d")}", from: "_date_3i")
-
-
-    #       fill_in 'start_time', with: "15:00"
-    #       fill_in 'duration', with: "1"
-
-    #       click_on 'Make a reservation!'
+          select("#{Date.today.strftime("%B")}", from: '_date_2i')
+          select("#{Date.today.strftime("%-d")}", from: "_date_3i")
 
 
-    #       expect(page).to have_content 'You reserved a computer'
-    #       expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
-    #     end
+          fill_in 'start_time', with: "15:00"
+          fill_in 'duration', with: "1"
 
-    #     Capybara.using_session('guest') do
-    #       expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
-    #     end
-    #   end
-    # end
+          click_on 'Make a reservation!'
+
+
+          expect(page).to have_content 'You reserved a computer'
+          expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+        end
+
+        Capybara.using_session('guest') do
+          expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
+        end
+      end
+    end
 
   end
 

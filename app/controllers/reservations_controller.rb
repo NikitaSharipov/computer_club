@@ -66,7 +66,7 @@ class ReservationsController < ApplicationController
       'reservations',
       ApplicationController.render(
         partial: 'reservations/reservation',
-        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%-m %d") }
+        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%d-%m-%Y")}
       )
     )
   end

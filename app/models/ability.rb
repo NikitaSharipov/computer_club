@@ -30,7 +30,6 @@ class Ability
   end
 
   def user_abilities
-    #guest_abilities
     can [:read], Computer
 
     can [:index, :date, :payment], Reservation
@@ -43,9 +42,4 @@ class Ability
     can :reservations, User, id: user.id
     can :destroy, Reservation, user_id: user.id
   end
-
-  def guest_abilities
-  end
-
-
 end
