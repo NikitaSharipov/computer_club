@@ -1,27 +1,29 @@
-h1= @report.title
-p Report start date: #{@report.start_date}
-p Report end date: #{@report.end_date}
--if @report.kind == 'reservation'
-  p Total for the given parameters there are #{@report.payed_reservation_count} payed and #{@report.unpayed_reservation_count} unpayed reservations
-  -if @report.proceeds
-    p For payed reservations:
-    p Proceeds: #{@report.proceeds} credits
-    p Rent length: #{@report.rent_length}
-    p Idle length #{@report.idle_length}
-    - @report.computers.each do |computer, hours|
-      p Rent length for #{computer.title} is #{hours} hour(s)
--elsif @report.kind == 'computers'
-  -if @report.service_needed.count != 0
-    p Service needed computers only for this date range is
-    -@report.service_needed.each do |computer|
-      p #{computer.title}
-  -else
-    p There are no computers needing maintenance at a given time interval
--elsif @report.kind == 'users'
-  -if @report.users_in_date_range.count != 0
-    p Total there are #{@report.users_in_date_range.count} user(s) registered only in this date range
-    -@report.users_in_date_range.each do |user|
-      p #{user.email}
-      p user's credits: #{user.credits}
-  -else
-    p There are no users registered at given time interval
+.row.justify-content-center
+  .col.col-md-4.text-center.card.border-primary
+    h1= @report.title
+    p Report start date: #{@report.start_date}
+    p Report end date: #{@report.end_date}
+    -if @report.kind == 'reservation'
+      p Total for the given parameters there are #{@report.payed_reservation_count} payed and #{@report.unpayed_reservation_count} unpayed reservations
+      -if @report.proceeds
+        p For payed reservations:
+        p Proceeds: #{@report.proceeds} credits
+        p Rent length: #{@report.rent_length}
+        p Idle length #{@report.idle_length}
+        - @report.computers.each do |computer, hours|
+          p Rent length for #{computer.title} is #{hours} hour(s)
+    -elsif @report.kind == 'computers'
+      -if @report.service_needed.count != 0
+        p Service needed computers only for this date range is
+        -@report.service_needed.each do |computer|
+          p #{computer.title}
+      -else
+        p There are no computers needing maintenance at a given time interval
+    -elsif @report.kind == 'users'
+      -if @report.users_in_date_range.count != 0
+        p Total there are #{@report.users_in_date_range.count} user(s) registered only in this date range
+        -@report.users_in_date_range.each do |user|
+          p #{user.email}
+          p user's credits: #{user.credits}
+      -else
+        p There are no users registered at given time interval

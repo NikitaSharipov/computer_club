@@ -1,28 +1,32 @@
-.computers
-  = render @computers
-  -if can?(:create, Computer)
-    //p= link_to 'Add computer', new_computer_path, class: 'btn btn-link'
-    = link_to 'Add computer', '#', class: 'add-computer-link'
-  = form_with model: @computer, class: 'hidden', html: { id: "add-computer" } do |f|
-    p
-      = f.label :title, 'Your computer title'
-      = f.text_field :title
-    p
-      = f.label :specifications, 'Specifications'
-      = f.text_area :specifications
-    p
-      = f.label :cost, 'Cost per hour'
-      = f.number_field :cost
-    p
-      = f.label :creation, 'Creation date'
-      = f.date_field :creation
-    p
-      = f.label :last_service, 'Last service'
-      = f.date_field :last_service
-    p
-      = f.label :service_frequency, 'Service_frequency'
-      = f.number_field :service_frequency
-    p= f.submit 'Add'
+.row.justify-content-center.mt-3
+  .col.col-md-4
+    .computers
+      = render @computers
+      -if can?(:create, Computer)
+        //p= link_to 'Add computer', new_computer_path, class: 'btn btn-link'
+        .mt-2.text-center
+          = link_to 'Add computer', '#', class: 'add-computer-link'
+      = form_with model: @computer, class: 'hidden', html: { id: "add-computer" } do |f|
+        .form-group
+        p
+          = f.label :title, 'Your computer title'
+          = f.text_field :title, class: 'form-control'
+        p
+          = f.label :specifications, 'Specifications'
+          = f.text_area :specifications, class: 'form-control'
+        p
+          = f.label :cost, 'Cost per hour'
+          = f.number_field :cost, class: 'form-control'
+        p
+          = f.label :creation, 'Creation date'
+          = f.date_field :creation, class: 'form-control'
+        p
+          = f.label :last_service, 'Last service'
+          = f.date_field :last_service, class: 'form-control'
+        p
+          = f.label :service_frequency, 'Service_frequency'
+          = f.number_field :service_frequency, class: 'form-control'
+        p= f.submit 'Add', class: 'btn btn-primary mb-2'
 
 
 

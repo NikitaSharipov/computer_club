@@ -21,13 +21,9 @@ feature 'Owner can watch computers report', %q{
     select("computers", from: "kind")
     fill_in 'Your report title', with: 'Title1'
 
-    select("#{date_today.year}", from: "_start_date_1i")
-    select("#{date_today.strftime("%B")}", from: "_start_date_2i")
-    select("#{date_today.day}", from: "_start_date_3i")
+    fill_in 'start_date', with: Date.today
 
-    select("#{date_tomorrow.year}", from: "_end_date_1i")
-    select("#{date_tomorrow.strftime("%B")}", from: "_end_date_2i")
-    select("#{date_tomorrow.day}", from: "_end_date_3i")
+    fill_in 'end_date', with: Date.tomorrow
 
     click_on 'Create report'
 
@@ -49,13 +45,9 @@ feature 'Owner can watch computers report', %q{
     select("computers", from: "kind")
     fill_in 'Your report title', with: 'Title1'
 
-    select("#{date_today.year}", from: "_end_date_1i")
-    select("#{date_today.strftime("%B")}", from: "_end_date_2i")
-    select("#{date_today.day}", from: "_end_date_3i")
+    fill_in 'start_date', with: Date.tomorrow
 
-    select("#{date_tomorrow.year}", from: "_start_date_1i")
-    select("#{date_tomorrow.strftime("%B")}", from: "_start_date_2i")
-    select("#{date_tomorrow.day}", from: "_start_date_3i")
+    fill_in 'end_date', with: Date.today
 
     click_on 'Create report'
 

@@ -26,10 +26,10 @@ class Reservation < ApplicationRecord
     date.to_date <= start_time.to_date
   end
 
-  def self.date_prepare (year, month, day)
-    date = year + '-' + month + '-' + day
-    date.split('-').last.length == 1 ? date.insert(-2, '0') : date
-  end
+  # def self.date_prepare (year, month, day)
+  #   date = year + '-' + month + '-' + day
+  #   date.split('-').last.length == 1 ? date.insert(-2, '0') : date
+  # end
 
   def duration_hours
     ((end_time - start_time) / 3600).to_i

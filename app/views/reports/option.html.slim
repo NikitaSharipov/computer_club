@@ -1,14 +1,17 @@
-= form_with url: reports_path, html: { id: "report" } do |f|
-  p
-    = f.label :title, 'Your report title'
-    = f.text_field :title
-  p
-    = f.label :start_date, 'Chose start date'
-    = f.date_select :start_date
-  p
-    = f.label :end_date, 'Chose end date'
-    = f.date_select :end_date
-  p
-    = f.label :type, 'Chose report type'
-    = f.select :kind, Report::TYPES
-  p= f.submit 'Create report'
+.row.justify-content-center
+  .col.col-md-4.text-center.card.border-primary
+    = form_with url: reports_path, html: { id: "report" } do |f|
+      .mt-3.form-group
+        p
+          = f.label :title, 'Your report title'
+          = f.text_field :title, class: 'form-control'
+        p
+          = f.label :start_date, 'Chose start date'
+          = f.date_field :start_date, class: 'form-control'
+        p
+          = f.label :end_date, 'Chose end date'
+          = f.date_field :end_date, class: 'form-control'
+        p
+          = f.label :type, 'Chose report type'
+          = f.select :kind, Report::TYPES
+        p= f.submit 'Create report'
