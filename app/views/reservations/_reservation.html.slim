@@ -1,14 +1,15 @@
 - @date ||= date
 -if reservation.show?(@date)
-  div id= "reservation #{reservation.id}" class= "reservation computer id #{reservation.computer_id}"
-    p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
-    p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
-    /-if can?(:destroy, Reservation)
-    -if current_user.admin?
-      =link_to "Delete", reservation, method: :delete, class: 'btn btn-link'
-      -if reservation.payed
-        p Payment made
-      -else
-        p User need to pay #{reservation.sum_pay(reservation.computer.cost)} credits
-        = form_with url: pay_reservation_path(reservation) , html: { id: "computer-pay" } do |f|
-          p= f.submit 'Close debt'
+  .card.mt-2.mb-3
+    div id= "reservation #{reservation.id}" class= "reservation computer id #{reservation.computer_id}"
+      p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+      p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+      /-if can?(:destroy, Reservation)
+      -if current_user.admin?
+        =link_to "Delete", reservation, method: :delete, class: 'btn btn-link'
+        -if reservation.payed
+          p Payment made
+        -else
+          p User need to pay #{reservation.sum_pay(reservation.computer.cost)} credits
+          = form_with url: pay_reservation_path(reservation) , html: { id: "computer-pay" } do |f|
+            p= f.submit 'Close debt'

@@ -33,7 +33,7 @@ feature 'User can replenish account', %q{
       select(admin.email, from: 'user_id')
       fill_in 'How many credits do you want to fund?', with: "100"
       click_on 'Replenish!'
-      expect(page).to have_content('credits: 200')
+      expect(page).to have_content('Account replenished.')
     end
 
   end
@@ -50,7 +50,7 @@ feature 'User can replenish account', %q{
       select(owner.email, from: 'user_id')
       fill_in 'How many credits do you want to fund?', with: "100"
       click_on 'Replenish!'
-      expect(page).to have_content('credits: 200')
+      expect(page).to have_content('Account replenished.')
     end
 
   end
