@@ -5,9 +5,7 @@ feature 'User can replenish account', %q{
   As an authenticated user
   I'd like to be able to replenish my account
 } do
-
   describe 'User' do
-
     given(:user) { create :user }
 
     background { sign_in(user) }
@@ -18,11 +16,9 @@ feature 'User can replenish account', %q{
       click_on 'Replenish!'
       expect(page).to have_content('credits: 200')
     end
-
   end
 
   describe 'Admin' do
-
     given(:admin) { create :user, :admin  }
 
     background { sign_in(admin) }
@@ -35,15 +31,12 @@ feature 'User can replenish account', %q{
       click_on 'Replenish!'
       expect(page).to have_content('Account replenished.')
     end
-
   end
 
   describe 'Owner' do
-
-    given(:owner) { create :user, :owner  }
+    given(:owner) { create :user, :owner }
 
     background { sign_in(owner) }
-
     scenario "can replenish user's account" do
       visit admin_panel_path
       click_on "Replenish user's account"
@@ -52,7 +45,5 @@ feature 'User can replenish account', %q{
       click_on 'Replenish!'
       expect(page).to have_content('Account replenished.')
     end
-
   end
-
 end

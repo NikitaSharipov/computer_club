@@ -5,9 +5,8 @@ feature 'Owner can watch computers report', %q{
   As an owner
   I'd like to watch computers report
 } do
-
-  given(:owner) { create :user, :owner  }
-  given(:date_tomorrow) { Date.tomorrow  }
+  given(:owner) { create :user, :owner }
+  given(:date_tomorrow) { Date.tomorrow }
   given(:date_today) { Date.today }
   given!(:report) {create(:report, title: 'test', start_date: Date.tomorrow, end_date: Date.tomorrow + 2.day, user: owner, kind: 'computers') }
 

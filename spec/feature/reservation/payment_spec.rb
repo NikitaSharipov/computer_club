@@ -5,7 +5,6 @@ feature 'User can pay for a computer', %q{
   As an authenticated user
   I'd like to be able to pay for a computer
 } do
-
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
   given!(:reservation) { create(:reservation, computer: computer, user: user) }
