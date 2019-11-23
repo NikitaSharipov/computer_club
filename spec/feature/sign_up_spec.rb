@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can sign up', %q{
+feature 'User can sign up', "
   In order to ask questions
   As an unauthenticated user
   I'd like to be able to sign up
-} do
+" do
   background do
     visit root_path
     click_on 'Sign up', match: :first

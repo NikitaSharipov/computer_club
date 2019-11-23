@@ -1,12 +1,10 @@
 require 'rails_helper'
 
-feature 'User can interact with reservations', %q{
+feature 'User can interact with reservations', "
   As an authenticated user
   I'd like to be able to interact with my reservations
-} do
-
+" do
   describe 'User' do
-
     given(:user) { create :user }
     given(:other) { create :user }
     given!(:computer) { create(:computer) }
@@ -28,5 +26,4 @@ feature 'User can interact with reservations', %q{
       expect(page).to_not have_content(other_reservation.start_time.strftime("%d %B, %H:%M"))
     end
   end
-
 end

@@ -1,8 +1,5 @@
 class ReportsController < ApplicationController
-
-  def option
-
-  end
+  def option; end
 
   def index
     @reports = Report.all
@@ -25,7 +22,7 @@ class ReportsController < ApplicationController
     if @report.save
       redirect_to report_path(@report), notice: 'You created a report'
     else
-      redirect_back fallback_location: root_path, notice: "#{@report.errors.full_messages}"
+      redirect_back fallback_location: root_path, notice: @report.errors.full_messages.to_s
     end
   end
 
@@ -38,5 +35,4 @@ class ReportsController < ApplicationController
   def report
     @report ||= Report.find(params[:id])
   end
-
 end

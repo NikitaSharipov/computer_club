@@ -1,5 +1,4 @@
 class ReservationsController < ApplicationController
-
   after_action :publish_reservation, only: [:create]
 
   load_and_authorize_resource
@@ -17,7 +16,6 @@ class ReservationsController < ApplicationController
   end
 
   def create
-
     @reservation = Reservation.new
     @reservation.computer_id = params[:computer_id]
     @reservation.user = income_user
@@ -31,7 +29,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservations_path, notice: 'You reserved a computer.'
     else
-      redirect_to reservations_path, notice: "#{@reservation.errors.full_messages}"
+      redirect_to reservations_path, notice: @reservation.errors.full_messages.to_s
     end
   end
 
@@ -56,17 +54,18 @@ class ReservationsController < ApplicationController
 
   private
 
-  #def reservation
+  # def reservation
   #  @reservation = Reservation.find(params[:id])
-  #end
+  # end
 
   def publish_reservation
     return if @reservation.errors.any?
+
     ActionCable.server.broadcast(
       'reservations',
       ApplicationController.render(
         partial: 'reservations/reservation',
-        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%d-%m-%Y")}
+        locals: { reservation: @reservation, current_user: current_user, date: Time.now.strftime("%d-%m-%Y") }
       )
     )
   end

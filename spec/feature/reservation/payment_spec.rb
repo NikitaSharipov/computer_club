@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can pay for a computer', %q{
+feature 'User can pay for a computer', "
   In order to use a computer
   As an authenticated user
   I'd like to be able to pay for a computer
-} do
-
+" do
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
   given!(:reservation) { create(:reservation, computer: computer, user: user) }
@@ -37,5 +36,4 @@ feature 'User can pay for a computer', %q{
     expect(page).to have_content('You successfully delete reservation.')
     expect(page).to have_content("Your credits: #{credits}")
   end
-
 end
