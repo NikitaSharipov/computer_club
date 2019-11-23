@@ -79,7 +79,6 @@ feature 'User can book a computer', %q{
       expect(page).to have_content('reservation time intersection')
     end
 
-
     # context "multiply reservations", js: true do
     #   scenario "reservation appears on another user's page" do
     #     Capybara.using_session('user') do
@@ -87,7 +86,7 @@ feature 'User can book a computer', %q{
     #       visit reservations_path
     #     end
 
-    #     Capybara.using_session('guest') do
+    #     Capybara.using_session('user2') do
     #       sign_in(user2)
     #       visit reservations_path
     #     end
@@ -95,9 +94,7 @@ feature 'User can book a computer', %q{
     #     Capybara.using_session('user') do
     #       select(computer.title, from: 'computer_id')
 
-    #       select("#{Date.today.strftime("%B")}", from: '_date_2i')
-    #       select("#{Date.today.strftime("%-d")}", from: "_date_3i")
-
+    #       fill_in 'date', with: Date.today
 
     #       fill_in 'start_time', with: "15:00"
     #       fill_in 'duration', with: "1"
@@ -109,7 +106,7 @@ feature 'User can book a computer', %q{
     #       expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
     #     end
 
-    #     Capybara.using_session('guest') do
+    #     Capybara.using_session('user2') do
     #       expect(page).to have_content "Reservations start time: #{Date.today.strftime("%d")} #{Date.today.strftime("%B")}, 15:00"
     #     end
     #   end

@@ -37,7 +37,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
 
-  Capybara.javascript_driver = :selenium_chrome
+  Capybara.javascript_driver = :selenium_chrome_headless
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
