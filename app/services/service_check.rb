@@ -1,7 +1,5 @@
 class Services::ServiceCheck
   def check_service
-    Computer.all.each do |computer|
-      computer.service_flag
-    end
+    Computer.all.each(&:service_flag)
   end
 end

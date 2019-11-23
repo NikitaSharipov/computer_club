@@ -23,7 +23,7 @@ describe Ability do
     let(:computer) { create :computer }
 
     let(:reservation) { create :reservation, user: user, computer: computer }
-    let(:other_reservation) { create :reservation, user: other, computer: computer}
+    let(:other_reservation) { create :reservation, user: other, computer: computer }
 
     it { should_not be_able_to :manage, :all }
 
@@ -45,12 +45,10 @@ describe Ability do
 
     it { should be_able_to :account_replenish, :user }
 
-    it { should be_able_to :reservations, user}
-    it { should_not be_able_to :reservations, other}
+    it { should be_able_to :reservations, user }
+    it { should_not be_able_to :reservations, other }
 
-    it { should be_able_to :reservations, user}
-    it { should_not be_able_to :reservations, other}
-
+    it { should be_able_to :reservations, user }
+    it { should_not be_able_to :reservations, other }
   end
-
 end

@@ -1,5 +1,4 @@
 class SoftwareRequestsController < ApplicationController
-
   authorize_resource
 
   def create

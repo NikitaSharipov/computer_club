@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ServiceRemindJob, type: :job do
-  let(:computers) {create_list(:computer, 2)}
+  let(:computers) { create_list(:computer, 2) }
   let(:service) { double('Services::ServiceRemindJob') }
 
   before do

@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version: 2.5.3
+Rails: 5.2.2
+Database: Postgresql
 
-Things you may want to cover:
+Система управления компьютерным клубом.
 
-* Ruby version
+Цели проекта:
+1 донести до пользователя всю информацию про компьютерный клуб
+2 упростить и автоматизировать бронирование компьютеров
+3 упростить и автоматизировать администрирование компьютерным клубом
+4 собирать статистику по каждому пользователю
+5 собирать и выдавать информацию по деятельности компьютерного клуба, высчитывать прибыли убытки и прочее
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

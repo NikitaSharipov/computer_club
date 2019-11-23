@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
@@ -32,8 +30,8 @@ class Ability
   def user_abilities
     can [:read], Computer
 
-    can [:index, :date, :payment], Reservation
-    can [:create, :destroy, :pay], Reservation, user_id: user.id
+    can %i[index date payment], Reservation
+    can %i[create destroy pay], Reservation, user_id: user.id
 
     can [:create], SoftwareRequest
 

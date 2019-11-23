@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ServiceReminderMailer, type: :mailer do
   describe "remind" do
-    let(:computers) {create_list(:computer, 2)}
+    let(:computers) { create_list(:computer, 2) }
     let(:mail) { ServiceReminderMailer.remind(computers) }
 
     it "renders the headers" do
@@ -14,5 +14,4 @@ RSpec.describe ServiceReminderMailer, type: :mailer do
       expect(mail.body.encoded).to match("Hi")
     end
   end
-
 end

@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can see the list of computers', %q{
+feature 'User can see the list of computers', "
   In order to choose computer
   As an authenticated user
   I'd like to be able to see the list of computers
-} do
-
+" do
   given!(:computer) { create(:computer) }
   given!(:computers) { create_list :computer, 3 }
 
@@ -29,11 +28,9 @@ feature 'User can see the list of computers', %q{
       expect(page).to have_content computer.cost
       expect(page).to have_content computer.creation
     end
-
   end
 
   context 'Guest' do
-
     scenario 'Guest can not see computer list' do
       visit computers_path
       computers.each do |q|
@@ -45,6 +42,5 @@ feature 'User can see the list of computers', %q{
       visit computer_path(computer)
       expect(page).to_not have_content computer.title
     end
-
   end
 end
