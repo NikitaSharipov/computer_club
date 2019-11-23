@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can replenish account', %q{
+feature 'User can replenish account', "
   In order to pay for a computer
   As an authenticated user
   I'd like to be able to replenish my account
-} do
+" do
   describe 'User' do
     given(:user) { create :user }
 
@@ -19,7 +19,7 @@ feature 'User can replenish account', %q{
   end
 
   describe 'Admin' do
-    given(:admin) { create :user, :admin  }
+    given(:admin) { create :user, :admin }
 
     background { sign_in(admin) }
 

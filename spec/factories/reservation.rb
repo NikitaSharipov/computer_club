@@ -6,6 +6,6 @@ FactoryBot.define do
 
   trait :other_reservation do
     start_time { Time.now + 7200 }
-    end_time { Time.now + 10800 }
+    end_time { Time.now + 10_800 }
   end
 end

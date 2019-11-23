@@ -18,7 +18,7 @@ class ComputersController < ApplicationController
     if @computer.save
       redirect_to computers_path, notice: 'You have added a computer'
     else
-      redirect_to computers_path, notice: "#{@computer.errors.full_messages}"
+      redirect_to computers_path, notice: @computer.errors.full_messages.to_s
     end
   end
 

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can log out', %q{
+feature 'User can log out', "
   In order to hide your data
   As an authenticated user
   I'd like to be able to log out
-} do
+" do
   given(:user) { create(:user) }
 
   scenario 'authenticated user tries to sign out' do

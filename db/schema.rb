@@ -1,5 +1,4 @@
-ActiveRecord::Schema.define(version: 2019_08_29_141704) do
-
+ActiveRecord::Schema.define(version: 20_190_829_141_704) do
   enable_extension "plpgsql"
 
   create_table "computers", force: :cascade do |t|

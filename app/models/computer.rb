@@ -8,7 +8,7 @@ class Computer < ApplicationRecord
   def service_flag
     service_needed_check
 
-    self.save!
+    save!
   end
 
   def service_flag_temporary(full_date)
@@ -18,10 +18,10 @@ class Computer < ApplicationRecord
   end
 
   def service_needed_check(full_date = Time.now)
-    self.last_service = self.creation if self.last_service.nil?
+    self.last_service = creation if last_service.nil?
 
-    past_months = (full_date - self.last_service).to_i / 1.month
+    past_months = (full_date - last_service).to_i / 1.month
 
-    self.service_needed = true if past_months >= self.service_frequency
+    self.service_needed = true if past_months >= service_frequency
   end
 end

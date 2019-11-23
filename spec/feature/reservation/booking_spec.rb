@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can book a computer', %q{
+feature 'User can book a computer', "
   In order to use a computer
   As an authenticated user
   I'd like to be able to book a computer
-} do
+" do
   given!(:computer) { create(:computer) }
 
   describe 'User' do
@@ -29,11 +29,11 @@ feature 'User can book a computer', %q{
 
         click_on 'Show'
 
-        expect(page).to have_content("Reservations start time: #{date_tomorrow.strftime("%d %B, %H:%M")}")
+        expect(page).to have_content("Reservations start time: #{date_tomorrow.strftime('%d %B, %H:%M')}")
       end
 
       scenario 'sees current reservations on today' do
-        expect(page).to have_content("Reservations start time: #{date_now.strftime("%d %B, %H:%M")}")
+        expect(page).to have_content("Reservations start time: #{date_now.strftime('%d %B, %H:%M')}")
       end
 
       scenario "don't sees reservations on other date" do
@@ -41,7 +41,7 @@ feature 'User can book a computer', %q{
 
         click_on 'Show'
 
-        expect(page).to_not have_content("Reservations start time: #{date_now.strftime("%d %B, %H:%M")}")
+        expect(page).to_not have_content("Reservations start time: #{date_now.strftime('%d %B, %H:%M')}")
       end
     end
 
@@ -68,7 +68,7 @@ feature 'User can book a computer', %q{
 
       fill_in 'date', with: Date.today
 
-      fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
+      fill_in 'start_time', with: start_time.strftime('%H:%M').to_s
       fill_in 'duration', with: "1"
 
       click_on 'Make a reservation!'
@@ -144,7 +144,7 @@ feature 'User can book a computer', %q{
 
       fill_in 'date', with: Date.today
 
-      fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
+      fill_in 'start_time', with: start_time.strftime('%H:%M').to_s
       fill_in 'duration', with: "1"
 
       click_on 'Make a reservation!'

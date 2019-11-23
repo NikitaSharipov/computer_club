@@ -6,4 +6,3 @@ FactoryBot.define do
     kind { 'reservation' }
   end
 end
-

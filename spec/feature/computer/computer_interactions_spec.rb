@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'Alministrator can add or delete computers', %q{
+feature 'Alministrator can add or delete computers', "
   In order to administrate
   As an administrator
   I'd like to be able to add or delete computers
-} do
-
+" do
   given(:user) { create :user, :admin }
   given!(:computer) { create(:computer) }
 
@@ -31,5 +30,4 @@ feature 'Alministrator can add or delete computers', %q{
     expect(page).to have_content('You successfully delete computer.')
     expect(page).to_not have_content(computer.title)
   end
-
 end

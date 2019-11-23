@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'User can request a software installation', %q{
+feature 'User can request a software installation', "
   In order to use necessary programm
   As an authenticated user
   I'd like to be able to leave a request for installation
-} do
+" do
   given(:user) { create :user }
   given!(:computer) { create(:computer) }
 

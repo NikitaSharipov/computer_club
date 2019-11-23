@@ -1,14 +1,14 @@
 class Report < ApplicationRecord
   belongs_to :user
-  #has_many :reports_reservation, dependent: :destroy
+  # has_many :reports_reservation, dependent: :destroy
 
   after_create :set_fields
 
   validates :title, :start_date, :end_date, :kind, presence: true
 
-  validate :validate_sequence, :on => :create
+  validate :validate_sequence, on: :create
 
-  TYPES = %w[reservation computers users]
+  TYPES = %w[reservation computers users].freeze
 
   def unpayed_reservation_count
     Reservation.by_date(start_date, end_date).where(payed: false).count
@@ -20,7 +20,7 @@ class Report < ApplicationRecord
 
   def computers
     reservations = Reservation.by_date(start_date, end_date)
-    computers_involvement = Hash.new
+    computers_involvement = {}
     reservations.each do |reservation|
       if reservation.payed?
         computers_involvement[reservation.computer] ||= 0
@@ -35,9 +35,9 @@ class Report < ApplicationRecord
 
     computers.each do |computer|
       computer.service_flag_temporary(start_date)
-      computers = computers - [computer] if computer.service_needed == true
+      computers -= [computer] if computer.service_needed == true
       computer.service_flag_temporary(end_date)
-      computers = computers - [computer] if computer.service_needed == false
+      computers -= [computer] if computer.service_needed == false
     end
     computers
   end
@@ -49,10 +49,11 @@ class Report < ApplicationRecord
   private
 
   def set_fields
-    return if self.kind == 'computers'
+    return if kind == 'computers'
 
     reservations = Reservation.by_date(start_date, end_date)
     return if reservations.count == 0
+
     # set proceeds and rent length
     self.proceeds = 0
     self.rent_length = 0
@@ -67,7 +68,7 @@ class Report < ApplicationRecord
     # switch from rational to integer and then from days to hours
     sum_hours = (end_date - start_date).to_i * 24
     self.idle_length = sum_hours - rent_length
-    self.save!
+    save!
   end
 
   def validate_sequence
@@ -75,5 +76,4 @@ class Report < ApplicationRecord
       errors.add(:base, :invalid_sequence, message: "start time can not be more than the end time") if start_date > end_date
     end
   end
-
 end

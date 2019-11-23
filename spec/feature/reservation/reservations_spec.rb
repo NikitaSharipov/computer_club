@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'User can interact with reservations', %q{
+feature 'User can interact with reservations', "
   As an authenticated user
   I'd like to be able to interact with my reservations
-} do
+" do
   describe 'User' do
     given(:user) { create :user }
     given(:other) { create :user }

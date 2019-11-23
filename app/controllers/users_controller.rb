@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def account_replenish
     authorize! :account_replenish, :user
   end
@@ -16,5 +15,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize! :reservations, @user
   end
-
 end
