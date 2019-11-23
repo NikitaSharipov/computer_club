@@ -27,8 +27,7 @@ feature 'User can book a computer', %q{
         date_tomorrow = date_now + 1.day
         reservation = Reservation.create(start_time: date_tomorrow, end_time: date_tomorrow + 3600, user: user, computer: computer)
 
-        select((date_tomorrow).strftime("%B"), from: '_date_reservations_2i')
-        select("#{date_tomorrow.day  }", from: "_date_reservations_3i")
+        fill_in 'date_reservations', with: Date.tomorrow
 
         click_on 'Show'
 
@@ -40,8 +39,8 @@ feature 'User can book a computer', %q{
       end
 
       scenario "don't sees reservations on other date" do
-        select((date_now).strftime("%B"), from: '_date_reservations_2i')
-        select((date_now + 1.day).day, from: "_date_reservations_3i")
+
+        fill_in 'date_reservations', with: Date.tomorrow
 
         click_on 'Show'
 
@@ -53,10 +52,7 @@ feature 'User can book a computer', %q{
       visit reservations_path
       select(computer.title, from: 'computer_id')
 
-      date = Date.today
-
-      select("#{date.strftime("%B")}", from: '_date_2i')
-      select("#{date.strftime("%-d")}", from: "_date_3i")
+      fill_in 'date', with: Date.today
 
       fill_in 'start_time', with: "15:00"
       fill_in 'duration', with: "1"
@@ -73,8 +69,7 @@ feature 'User can book a computer', %q{
       visit reservations_path
       select(computer.title, from: 'computer_id')
 
-      select("#{start_time.strftime("%B")}", from: '_date_2i')
-      select("#{start_time.strftime("%-d")}", from: "_date_3i")
+      fill_in 'date', with: Date.today
 
       fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
       fill_in 'duration', with: "1"
@@ -139,10 +134,7 @@ feature 'User can book a computer', %q{
       select(admin.email, from: 'user_id')
       select(computer.title, from: 'computer_id')
 
-      date = Date.today
-
-      select("#{date.strftime("%B")}", from: '_date_2i')
-      select("#{date.strftime("%-d")}", from: "_date_3i")
+      fill_in 'date', with: Date.today
 
       fill_in 'start_time', with: "15:00"
       fill_in 'duration', with: "1"
@@ -161,8 +153,7 @@ feature 'User can book a computer', %q{
       select(admin.email, from: 'user_id')
       select(computer.title, from: 'computer_id')
 
-      select("#{start_time.strftime("%B")}", from: '_date_2i')
-      select("#{start_time.strftime("%-d")}", from: "_date_3i")
+      fill_in 'date', with: Date.today
 
       fill_in 'start_time', with: "#{start_time.strftime("%H:%M")}"
       fill_in 'duration', with: "1"

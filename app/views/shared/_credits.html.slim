@@ -1,4 +1,4 @@
-.float-right.replenish
+.replenish
   - if user_signed_in?
     span Your credits: #{current_user.credits}
     =link_to 'Replenish account', account_replenish_users_path, class: 'btn btn-link'

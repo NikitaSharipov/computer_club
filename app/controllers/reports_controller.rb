@@ -16,8 +16,10 @@ class ReportsController < ApplicationController
     @report = Report.new
     @report.user = income_user
     @report.title = params[:title] == '' ? Date.today.to_s : params[:title]
-    @report.start_date = Date.new(params["start_date(1i)"].to_i, params["start_date(2i)"].to_i, params["start_date(3i)"].to_i)
-    @report.end_date = Date.new(params["end_date(1i)"].to_i, params["end_date(2i)"].to_i, params["end_date(3i)"].to_i)
+
+    @report.start_date = params["start_date"].to_date
+    @report.end_date = params["end_date"].to_date
+
     @report.kind = params[:kind]
 
     if @report.save

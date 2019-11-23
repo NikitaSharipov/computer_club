@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
   end
 
   def date
-    @date = Reservation.date_prepare(params["date_reservations(1i)"], params["date_reservations(2i)"], params["date_reservations(3i)"])
+    @date = params["date_reservations"]
     @computers = Computer.all
 
     render :index
@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
     @reservation.computer_id = params[:computer_id]
     @reservation.user = income_user
 
-    start_time = params[:start_time].to_datetime.change(month: params["date(2i)"].to_i, day: params["date(3i)"].to_i)
+    start_time = (params['date'] + ' ' + params['start_time']).to_datetime
 
     @reservation.start_time = start_time
 

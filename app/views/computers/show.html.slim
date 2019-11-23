@@ -1,21 +1,24 @@
-.computer
-  h1= @computer.title
-  p Specification: #{@computer.specifications}
-  p Cost per hour: #{@computer.cost} рублей
-  p Creation date: #{@computer.creation}
+.row.justify-content-center.mt-3
+  .col.col-md-4.card.border-primary.text-center
+    .computer
+      h1= @computer.title
+      p Specification: #{@computer.specifications}
+      p Cost per hour: #{@computer.cost} рублей
+      p Creation date: #{@computer.creation}
 
-  = link_to 'Leave a request for software instalation', '#', class: 'leave-request-link'
+      = link_to 'Leave a request for software instalation', '#', class: 'leave-request-link'
 
 
-  = form_with model: [@computer, SoftwareRequest.new], url: computer_software_requests_path(@computer.id), class: 'hidden', html: { id: "computer-request" } do |f|
-      p
-        = f.label :title, 'Software title'
-        = f.text_area :title
-      p
-        = f.label :url, 'Url for downloading'
-        = f.text_area :url
-      p
-        = f.label :description, 'Description'
-        = f.text_area :description
+      = form_with model: [@computer, SoftwareRequest.new], url: computer_software_requests_path(@computer.id), class: 'hidden', html: { id: "computer-request" } do |f|
+        .form-group
+          p
+            = f.label :title, 'Software title:'
+            = f.text_area :title, class: 'form-control'
+          p
+            = f.label :url, 'Url for downloading:'
+            = f.text_area :url, class: 'form-control'
+          p
+            = f.label :description, 'Description:'
+            = f.text_area :description, class: 'form-control'
 
-      p= f.submit 'Send request!'
+          p= f.submit 'Send request!', class: 'btn btn-primary mb-2'

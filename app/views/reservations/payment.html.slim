@@ -1,20 +1,22 @@
-.reservations
-  .computers
-    -@involved_computers.each do |computer|
-      div class="computer_#{computer.id}"
-        h1= computer.title
-        -computer.reservation.each do |reservation|
-          -if reservation.show_further?
-            div class="reservation #{reservation.id}"
-              p Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
-              p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
-              p Reservation duration: #{reservation.duration_hours}
-              p Computer cost: #{computer.cost} credits per hour
-              -if reservation.payed
-                p Payment made
-              -else
-                p You need to pay #{reservation.sum_pay(computer.cost)} credits
-                = form_with url: pay_reservation_path(reservation) , html: { id: "reservation-pay" } do |f|
-                  p= f.submit 'Pay now!'
+.row.justify-content-center
+  .col.col-md-4
+      .computers.text-center
+        -@involved_computers.each do |computer|
+          div class="computer_#{computer.id}, mt-3"
+            h1= computer.title
+            -computer.reservation.each do |reservation|
+              -if reservation.show_further?
+                div class="reservation #{reservation.id}"
+                  .card.border-primary.mt-3
+                    p class="mt-3" Reservations start time: #{reservation.start_time.strftime("%d %B, %H:%M")}
+                    p Reservations end time: #{reservation.end_time.strftime("%d %B, %H:%M")}
+                    p Reservation duration: #{reservation.duration_hours}
+                    p Computer cost: #{computer.cost} credits per hour
+                    -if reservation.payed
+                      p Payment made
+                    -else
+                      p You need to pay #{reservation.sum_pay(computer.cost)} credits
+                      = form_with url: pay_reservation_path(reservation) , html: { id: "reservation-pay" } do |f|
+                        p= f.submit 'Pay now!', class: 'btn btn-primary'
 
 
